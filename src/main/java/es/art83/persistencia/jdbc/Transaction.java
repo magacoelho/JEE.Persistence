@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Transaccion {
+public class Transaction {
     public static void main(String[] args) {
         Connection conexion = null;
         Statement sentencia = null;
