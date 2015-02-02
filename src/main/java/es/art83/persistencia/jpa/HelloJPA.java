@@ -1,4 +1,4 @@
-package es.art83.bbdd.basic;
+package es.art83.persistencia.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;

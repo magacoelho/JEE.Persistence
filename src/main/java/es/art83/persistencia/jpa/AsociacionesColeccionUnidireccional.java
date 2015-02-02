@@ -1,4 +1,4 @@
-package es.art83.bbdd.basic;
+package es.art83.persistencia.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
