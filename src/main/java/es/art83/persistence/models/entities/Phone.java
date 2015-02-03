@@ -1,6 +1,15 @@
-package es.art83.persistence.jdbc.models.entities;
+package es.art83.persistence.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import es.art83.persistence.models.utils.PhoneType;
+
+@Entity
 public class Phone {
+    @Id
+    @GeneratedValue
     private Integer id;
 
     private PhoneType phoneType;

@@ -1,5 +1,8 @@
-package es.art83.persistence.jdbc.models.entities;
+package es.art83.persistence.models.entities;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
 	private String city;
 	private String street;

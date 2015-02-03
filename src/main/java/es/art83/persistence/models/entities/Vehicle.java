@@ -1,12 +1,39 @@
-package es.art83.persistence.jdbc.models.entities;
+package es.art83.persistence.models.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = Vehicle.TABLE)
 public class Vehicle {
+    public static final String TABLE = "VEHICLE";
+
+    public static final String ID = "ID";
+
+    public static final String IDENTIFICATION = "IDENTIFICATION";
+
+    public static final String DESCRIPTION = "DESCRIPTION";
+
+    public static final String USER_ID = "USER_ID";
+
+    @Id
+    @GeneratedValue
+    @Column(name = ID)
     private Integer id;
 
+    @Column(name = IDENTIFICATION)
     private String identification;
 
+    @Column(name = DESCRIPTION)
     private String description;
-    
+
+    @ManyToOne
+    @JoinColumn(name = USER_ID)
     private User user;
 
     public Vehicle(String identification, String description) {

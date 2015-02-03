@@ -1,4 +1,4 @@
-package es.art83.persistence.jpa.models.entities;
+package es.art83.persistence.models.entities;
 
 import java.util.List;
 
