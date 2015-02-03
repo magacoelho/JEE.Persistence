@@ -29,7 +29,7 @@ public class User {
     // relación mapeada aqui
     // Se aplica cascada
     @OneToOne(cascade = CascadeType.ALL)
-    private Phone mainPhone;
+    private Category category;
 
     // Relación unidireccional: 1:n
     // relación mapeada en una tabla de unión
@@ -81,12 +81,12 @@ public class User {
         this.address = address;
     }
 
-    public Phone getMainPhone() {
-        return mainPhone;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setMainPhone(Phone mainPhone) {
-        this.mainPhone = mainPhone;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public List<Phone> getPhones() {
@@ -111,8 +111,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", password=" + password + ", detail="
-                + address + ", mainPhone=" + mainPhone + ", phones=" + phones + ", boat=" + boat
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", address="
+                + address + ", category=" + category + ", phones=" + phones + ", boat=" + boat
                 + ", vehicles=" + vehicles + "]";
     }
 

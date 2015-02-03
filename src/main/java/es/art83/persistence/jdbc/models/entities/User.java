@@ -3,42 +3,43 @@ package es.art83.persistence.jdbc.models.entities;
 import java.util.List;
 
 public class User {
+
     private int id;
 
     private String name;
 
     private String password;
 
-    //Relación embebida
-    private Address detail;
+    // Relación embebida
+    private Address address;
 
-    //Relación unidireccional: 1:1
-    //relación mapeada aqui
-    //Se aplica cascada
-    private Phone mainPhone;
+    // Relación unidireccional: 1:1
+    // relación mapeada aqui
+    // Se aplica cascada
+    private Category category;
 
-    //Relación unidireccional: 1:n
-    //relación mapeada en la otra entidad
-    //Se aplica cascada
+    // Relación unidireccional: 1:n
+    // relación mapeada en una tabla de unión
+    // Se aplica cascada
     private List<Phone> phones;
 
-    //Relación bidireccional: 1:1
-    //relación mapeada en la otra entidad
-    private Vehicle mainVehicle;
+    // Relación bidireccional: 1:1
+    // relación mapeada en la otra entidad
+    private Boat boat;
 
-    //Relación bidireccional: 1:n
-    //relación mapeada en la otra entidad
-    private List<Vehicle> vehicles;
+    // Relación bidireccional: 1:n
+    // relación mapeada en la otra entidad
+   private List<Vehicle> vehicles;
 
-    public User(String name, String password, Address detail) {
+    public User(String name, String password, Address address) {
         super();
         this.name = name;
         this.password = password;
-        this.detail = detail;
+        this.address = address;
     }
 
     public User() {
-   }
+    }
 
     public String getName() {
         return name;
@@ -56,20 +57,20 @@ public class User {
         this.password = password;
     }
 
-    public Address getDetail() {
-        return detail;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setDetail(Address detail) {
-        this.detail = detail;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public Phone getMainPhone() {
-        return mainPhone;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setMainPhone(Phone mainPhone) {
-        this.mainPhone = mainPhone;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public List<Phone> getPhones() {
@@ -78,14 +79,6 @@ public class User {
 
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
-    }
-
-    public Vehicle getMainVehicle() {
-        return mainVehicle;
-    }
-
-    public void setMainVehicle(Vehicle mainVehicle) {
-        this.mainVehicle = mainVehicle;
     }
 
     public List<Vehicle> getVehicles() {
@@ -102,10 +95,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", password=" + password + ", detail="
-                + detail + ", mainPhone=" + mainPhone + ", phones=" + phones + ", mainVehicle="
-                + mainVehicle + ", vehicles=" + vehicles + "]";
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", address="
+                + address + ", category=" + category + ", phones=" + phones + ", boat=" + boat
+                + ", vehicles=" + vehicles + "]";
     }
 
-    
 }
