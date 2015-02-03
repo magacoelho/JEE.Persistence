@@ -1,4 +1,4 @@
-package es.art83.persistencia.jpa;
+package es.art83.persistence.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;

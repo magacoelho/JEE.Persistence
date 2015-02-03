@@ -1,4 +1,4 @@
-package es.art83.persistencia.jpa;
+package es.art83.persistence.jpa;
 
 import java.util.ArrayList;
 import java.util.List;

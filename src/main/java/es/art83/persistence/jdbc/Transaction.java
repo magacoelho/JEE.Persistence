@@ -1,4 +1,4 @@
-package es.art83.persistencia.jdbc;
+package es.art83.persistence.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class HelloJDBC {
+public class Transaction {
     public static void main(String[] args) {
         Connection conexion = null;
         Statement sentencia = null;
@@ -19,30 +19,37 @@ public class HelloJDBC {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(url, user, pass);
             sentencia = conexion.createStatement();
-            System.out.println("OK. Driver cargado");
         } catch (ClassNotFoundException e) {
             System.out.println("Imposible cargar el driver: " + e.getMessage());
         } catch (SQLException e) {
             System.out.println("Imposible conectar: " + e.getMessage());
         }
-
         try {
-            sentencia
-                    .executeUpdate("CREATE TABLE IF NOT EXISTS tabla1 (id1 INT PRIMARY KEY,nombre CHAR(20) DEFAULT '-')");
-            System.out.println("OK. Tabla creada");
-        } catch (SQLException e) {
-            System.out.println("Creación de tabla fallida: " + e.getMessage());
-        }
+            // begin
+            conexion.setAutoCommit(false);
 
-        try {
-            sentencia.executeUpdate("INSERT tabla1 (id1) VALUES (3)");
-            sentencia.executeUpdate("INSERT tabla1 VALUES (4,'Jesús')");
-            sentencia.executeUpdate("INSERT tabla1 VALUES (5,'Juan')");
-            System.out.println("OK. Datos introducidos en la tabla");
-        } catch (SQLException e) {
-            System.out.println("Insercción de datos de tabla fallida: " + e.getMessage());
-        }
+            // sentencias SQL
+            sentencia = conexion.createStatement();
+            sentencia.executeUpdate("INSERT tabla1 VALUES (8,'Trans1')");
+            sentencia.executeUpdate("INSERT tabla1 VALUES (8,'Trans2')");
 
+            // Si se llega a este punto, todo ha ido bien
+            conexion.commit();
+        } catch (SQLException e) {
+            try {
+                // Hay problemas, se deshace todo
+                conexion.rollback();
+                System.out.println("Deshaciendo... " + e.getMessage());
+            } catch (SQLException e1) {
+                System.out.println("ERROR (rollback): " + e1.getMessage());
+            }
+        } finally {
+            try {
+                conexion.setAutoCommit(true);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
         try {
             result = sentencia.executeQuery("SELECT * FROM tabla1");
             while (result.next())
@@ -50,15 +57,6 @@ public class HelloJDBC {
                         + result.getString("nombre"));
         } catch (SQLException e) {
             System.out.println("Consulta Fallida: " + e.getMessage());
-        }
-
-        try {
-            sentencia.executeUpdate("DELETE FROM tabla1  WHERE id1=3");
-            sentencia.executeUpdate("DELETE FROM tabla1  WHERE id1=4");
-            sentencia.executeUpdate("DELETE FROM tabla1  WHERE id1=5");
-            System.out.println("OK. Datos borrados de la tabla");
-        } catch (SQLException e) {
-            System.out.println("Insercción de datos de tabla fallida: " + e.getMessage());
         }
 
     }
