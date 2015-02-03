@@ -50,8 +50,8 @@ public class DAOJDBCFactory extends DAOFactory {
             Statement statement = getConnection().createStatement();
             statement.executeUpdate(String.format(DROP_TABLE, User.TABLE));
             statement.executeUpdate(String.format(DROP_TABLE, Category.TABLE));
-            statement.executeUpdate(CategoryDAOJDBC.tableSql());
-            statement.executeUpdate(UserDAOJDBC.tableSql());
+            statement.executeUpdate(CategoryDAOJDBC.sqlToCreateTable());
+            statement.executeUpdate(UserDAOJDBC.sqlToCreateTable());
         } catch (SQLException e) {
             LogManager.getLogger(DAOJDBCFactory.class).error("Drop tables: " + e.getMessage());
         }

@@ -15,13 +15,6 @@ import es.art83.persistence.models.entities.Category;
 import es.art83.persistence.models.entities.User;
 
 public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDAO {
-    private static final String CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL AUTO_INCREMENT, %s VARCHAR(255), "
-            + "%s VARCHAR(255), %s VARCHAR(255), %s VARCHAR(255), %s INT, PRIMARY KEY (%s), "
-            + "FOREIGN KEY(%s) REFERENCES %s(ID) )";
-
-    private static final String INSERT = "INSERT INTO %s (%s,%s,%s,%s,%s) VALUES ('%s','%s','%s','%s',%d)";
-
-    private static final String UPDATE = "UPDATE %s SET %s='%s', %s='%s', %s='%s', %s='%s', %s=%d WHERE ID=%d";
 
     private Logger log = LogManager.getLogger(UserDAOJDBC.class);
 
@@ -50,11 +43,17 @@ public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDA
         return null;
     }
 
-    public static String tableSql() {
+    private static final String CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL AUTO_INCREMENT, %s VARCHAR(255), "
+            + "%s VARCHAR(255), %s VARCHAR(255), %s VARCHAR(255), %s INT, PRIMARY KEY (%s), "
+            + "FOREIGN KEY(%s) REFERENCES %s(ID) )";
+
+    public static String sqlToCreateTable() {
         return String
                 .format(CREATE_TABLE, User.TABLE, User.ID, User.NAME, User.PASSWORD, Address.CITY,
                         Address.STREET, User.CATEGORY, User.ID, User.CATEGORY, Category.TABLE);
     }
+
+    private static final String INSERT = "INSERT INTO %s (%s,%s,%s,%s,%s) VALUES ('%s','%s','%s','%s',%d)";
 
     @Override
     public void create(User user) {
@@ -75,6 +74,8 @@ public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDA
         ResultSet resultSet = this.query(String.format(SELECT, User.TABLE, id));
         return this.create(resultSet);
     }
+
+    private static final String UPDATE = "UPDATE %s SET %s='%s', %s='%s', %s='%s', %s='%s', %s=%d WHERE ID=%d";
 
     @Override
     public void update(User user) {

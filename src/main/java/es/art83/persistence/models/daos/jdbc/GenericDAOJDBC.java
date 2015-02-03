@@ -25,7 +25,9 @@ public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
     public ResultSet query(String sql) {
         try {
             Statement statement = DAOJDBCFactory.getConnection().createStatement();
-            return statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(sql);
+            LogManager.getLogger(this.getClass().getName()).debug("Query: " + sql);
+            return resultSet;
         } catch (SQLException e) {
             this.logError("Query SQL: ---" + sql + "---");
             this.logError(e.getMessage());
@@ -37,6 +39,7 @@ public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
         try {
             Statement statement = DAOJDBCFactory.getConnection().createStatement();
             statement.executeUpdate(sql);
+            LogManager.getLogger(this.getClass().getName()).debug("UpdateSql: " + sql);
         } catch (SQLException e) {
             this.logError("Update SQL: ---" + sql + "---");
             this.logError(e.getMessage());
@@ -54,6 +57,5 @@ public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
         }
         return -1;
     }
-
 
 }

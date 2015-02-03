@@ -59,7 +59,7 @@ public class User {
     private List<Vehicle> vehicles;
 
     public User(String name, String password, Address address) {
-        super();
+        assert address != null;
         this.name = name;
         this.password = password;
         this.address = address;

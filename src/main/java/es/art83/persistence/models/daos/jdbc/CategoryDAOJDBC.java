@@ -12,8 +12,6 @@ import es.art83.persistence.models.daos.CategoryDAO;
 import es.art83.persistence.models.entities.Category;
 
 public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implements CategoryDAO {
-    private static final String CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255), "
-            + "%s VARCHAR(255), PRIMARY KEY (%s))";
 
     private static final String INSERT = "INSERT INTO %s (%s,%s,%s) VALUES (%d,'%s','%s')";
 
@@ -34,7 +32,9 @@ public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implement
         return null;
     }
 
-    public static String tableSql() {
+    private static final String CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255), "
+            + "%s VARCHAR(255), PRIMARY KEY (%s))";
+    public static String sqlToCreateTable() {
         return String.format(CREATE_TABLE, Category.TABLE, Category.ID, Category.DESCRIPTION,
                 Category.NAME, Category.ID);
     }
