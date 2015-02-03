@@ -21,7 +21,7 @@ public class CategoryDAOJDBCTest {
     @BeforeClass
     public static void beforeClass() {
         DAOFactory.setFactory(new DAOJDBCFactory());
-        DAOFactory.getFactory().getCategoryDAO().createTable();
+        DAOJDBCFactory.dropAndCreateTables();
     }
 
     @Before
@@ -34,8 +34,7 @@ public class CategoryDAOJDBCTest {
     @Test
     public void testRead() {
         Category categoryBD = dao.read(category.getId());
-        assertEquals(category.getName(), categoryBD.getName());
-        assertEquals(category.getDescription(), categoryBD.getDescription());
+        assertEquals(category, categoryBD);
     }
 
     @Test
@@ -44,8 +43,7 @@ public class CategoryDAOJDBCTest {
         category.setDescription("other");
         dao.update(category);
         Category categoryBD = dao.read(category.getId());
-        assertEquals(category.getName(), categoryBD.getName());
-        assertEquals(category.getDescription(), categoryBD.getDescription());
+        assertEquals(category, categoryBD);
     }
 
     @Test
@@ -64,7 +62,7 @@ public class CategoryDAOJDBCTest {
     
     @After
     public void after(){
-        dao.createTable();
+        DAOJDBCFactory.dropAndCreateTables();
     }
 
 }

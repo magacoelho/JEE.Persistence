@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface GenericDAO<T, ID> {
 
-    void createTable();
-
     void create(T entity);
 
     T read(ID id);

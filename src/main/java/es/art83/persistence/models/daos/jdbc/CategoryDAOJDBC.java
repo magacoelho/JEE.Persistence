@@ -34,11 +34,9 @@ public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implement
         return null;
     }
 
-    @Override
-    public void createTable() {
-        this.updateSql(String.format(DROP_TABLE, Category.TABLE));
-        this.updateSql(String.format(CREATE_TABLE, Category.TABLE, Category.ID,
-                Category.DESCRIPTION, Category.NAME, Category.ID));
+    public static String tableSql() {
+        return String.format(CREATE_TABLE, Category.TABLE, Category.ID, Category.DESCRIPTION,
+                Category.NAME, Category.ID);
     }
 
     @Override

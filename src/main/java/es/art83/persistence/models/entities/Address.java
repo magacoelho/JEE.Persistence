@@ -4,8 +4,13 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
-	private String city;
-	private String street;
+    public static final String CITY = "CITY";
+
+    public static final String STREET = "STREET";
+
+    private String city;
+
+    private String street;
 
     public Address(String city, String street) {
         this.city = city;
@@ -32,8 +37,15 @@ public class Address {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        assert obj != null;
+        Address other = (Address) obj;
+        return city.equals(other.city) && street.equals(other.street);
+    }
+
+    @Override
     public String toString() {
-        return "Direction [city=" + city + ", street=" + street + "]";
+        return "Address [city=" + city + ", street=" + street + "]";
     }
 
 }

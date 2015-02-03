@@ -9,8 +9,11 @@ import javax.persistence.Transient;
 @Table(name = Category.TABLE)
 public class Category {
     public static final String TABLE = "category";
+
     public static final String ID = "ID";
+
     public static final String NAME = "NAME";
+
     public static final String DESCRIPTION = "DESCRIPTION";
 
     // Clave primaria
@@ -64,6 +67,13 @@ public class Category {
 
     public void setVolatil(String volatil) {
         this.volatil = volatil;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        assert obj != null;
+        Category other = (Category) obj;
+        return id.equals(other.id) && name.equals(other.name) && description.equals(other.description);
     }
 
     @Override

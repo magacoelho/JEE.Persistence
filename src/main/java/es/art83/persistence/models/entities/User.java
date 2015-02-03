@@ -9,13 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = User.TABLE)
 public class User {
+    public static final String TABLE = "user";
+
+    public static final String ID = "ID";
+
+    public static final String NAME = "NAME";
+
+    public static final String PASSWORD = "PASSWORD";
+
+    public static final String CATEGORY = "CATEGORY_ID";
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -55,6 +66,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -105,8 +124,27 @@ public class User {
         this.vehicles = vehicles;
     }
 
-    public int getId() {
-        return id;
+    public Boat getBoat() {
+        return boat;
+    }
+
+    public void setBoat(Boat boat) {
+        this.boat = boat;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        assert obj != null;
+        User other = (User) obj;
+        boolean result = id.equals(other.id) && name.equals(other.name)
+                && password.equals(other.password) && address.equals(other.address);
+        if (category == null) {
+            result = result && other.category == null;
+        } else {
+            result = result && category.equals(other.category);
+        }
+        return result;
+
     }
 
     @Override

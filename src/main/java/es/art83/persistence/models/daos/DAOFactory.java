@@ -8,12 +8,18 @@ public abstract class DAOFactory {
     }
 
     public static DAOFactory getFactory() {
-        assert factory!=null;
+        assert factory != null;
         return factory;
     }
 
     public abstract UserDAO getUserDAO();
 
     public abstract CategoryDAO getCategoryDAO();
+
+    public abstract BoatDAO getBoatDAO();
+
+    public abstract VehicleDAO getVehicleDAO();
+
+    public abstract PhoneDAO getPhoneDAO();
 
 }
