@@ -1,4 +1,4 @@
-package es.art83.persistence.models.entities;
+package es.art83.persistence.jdbc.models.entities;
 
 public class Category {
     //Clave primaria

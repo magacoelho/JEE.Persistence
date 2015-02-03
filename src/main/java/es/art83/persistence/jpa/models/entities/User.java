@@ -1,44 +1,61 @@
-package es.art83.persistence.models.entities;
+package es.art83.persistence.jpa.models.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue
     private int id;
 
     private String name;
 
     private String password;
 
-    //Relación embebida
-    private Address detail;
+    // Relación embebida
+    @Embedded
+    private Address address;
 
-    //Relación unidireccional: 1:1
-    //relación mapeada aqui
-    //Se aplica cascada
+    // Relación unidireccional: 1:1
+    // relación mapeada aqui
+    // Se aplica cascada
+    @OneToOne(cascade = CascadeType.ALL)
     private Phone mainPhone;
 
-    //Relación unidireccional: 1:n
-    //relación mapeada en la otra entidad
-    //Se aplica cascada
+    // Relación unidireccional: 1:n
+    // relación mapeada en una tabla de unión
+    // Se aplica cascada
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Phone> phones;
 
-    //Relación bidireccional: 1:1
-    //relación mapeada en la otra entidad
-    private Vehicle mainVehicle;
+    // Relación bidireccional: 1:1
+    // relación mapeada en la otra entidad
+    @OneToOne(mappedBy = "user")
+    private Boat boat;
 
-    //Relación bidireccional: 1:n
-    //relación mapeada en la otra entidad
+    // Relación bidireccional: 1:n
+    // relación mapeada en la otra entidad
+    @OneToMany(mappedBy = "user")
     private List<Vehicle> vehicles;
 
-    public User(String name, String password, Address detail) {
+    public User(String name, String password, Address address) {
         super();
         this.name = name;
         this.password = password;
-        this.detail = detail;
+        this.address = address;
     }
 
     public User() {
-   }
+    }
 
     public String getName() {
         return name;
@@ -56,12 +73,12 @@ public class User {
         this.password = password;
     }
 
-    public Address getDetail() {
-        return detail;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setDetail(Address detail) {
-        this.detail = detail;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Phone getMainPhone() {
@@ -80,14 +97,6 @@ public class User {
         this.phones = phones;
     }
 
-    public Vehicle getMainVehicle() {
-        return mainVehicle;
-    }
-
-    public void setMainVehicle(Vehicle mainVehicle) {
-        this.mainVehicle = mainVehicle;
-    }
-
     public List<Vehicle> getVehicles() {
         return vehicles;
     }
@@ -103,9 +112,8 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", name=" + name + ", password=" + password + ", detail="
-                + detail + ", mainPhone=" + mainPhone + ", phones=" + phones + ", mainVehicle="
-                + mainVehicle + ", vehicles=" + vehicles + "]";
+                + address + ", mainPhone=" + mainPhone + ", phones=" + phones + ", boat=" + boat
+                + ", vehicles=" + vehicles + "]";
     }
 
-    
 }

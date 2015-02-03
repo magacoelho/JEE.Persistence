@@ -6,10 +6,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import es.art83.bbdd.models.utils.PhoneType;
+import es.art83.persistence.models.utils.PhoneType;
 
 @Entity
-public class Phone {
+public class Phone1 {
     @Id
     @GeneratedValue
     private int id;
@@ -19,11 +19,11 @@ public class Phone {
     @Enumerated(EnumType.STRING) //Opcional
     private PhoneType phoneType;
 
-    public Phone() {
+    public Phone1() {
         super();
     }
 
-    public Phone(int number, PhoneType phoneType) {
+    public Phone1(int number, PhoneType phoneType) {
         this.number = number;
         this.phoneType = phoneType;
     }

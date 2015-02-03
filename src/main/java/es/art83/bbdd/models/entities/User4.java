@@ -15,12 +15,12 @@ public class User4 {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL) // La relación se mapea en User4
-    private Phone phone;
+    private Phone1 phone;
 
     public User4() {
     }
 
-    public User4(Integer id, String name, Phone phone) {
+    public User4(Integer id, String name, Phone1 phone) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -42,11 +42,11 @@ public class User4 {
         this.name = name;
     }
 
-    public Phone getPhone() {
+    public Phone1 getPhone() {
         return phone;
     }
 
-    public void setPhone(Phone phone) {
+    public void setPhone(Phone1 phone) {
         this.phone = phone;
     }
 

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 @Entity
-public class User {
+public class User1 {
     @Id
     private Integer id;
 
@@ -16,11 +16,11 @@ public class User {
     @Transient //No persistente
     private String volatil;
 
-    public User() {
+    public User1() {
         super();
     }
 
-    public User(Integer id, String name) {
+    public User1(Integer id, String name) {
         this.id = id;
         this.name = name;
     }

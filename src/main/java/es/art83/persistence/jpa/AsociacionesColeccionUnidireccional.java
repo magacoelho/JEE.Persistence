@@ -6,16 +6,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import es.art83.bbdd.models.entities.Phone;
+import es.art83.bbdd.models.entities.Phone1;
 import es.art83.bbdd.models.entities.User5;
-import es.art83.bbdd.models.utils.PhoneType;
+import es.art83.persistence.models.utils.PhoneType;
 
 public class AsociacionesColeccionUnidireccional {
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        List<Phone> phones = new ArrayList<>();
-        phones.add(new Phone(111, PhoneType.HOME));
-        phones.add(new Phone(222, PhoneType.MOBILE));
+        List<Phone1> phones = new ArrayList<>();
+        phones.add(new Phone1(111, PhoneType.HOME));
+        phones.add(new Phone1(222, PhoneType.MOBILE));
         User5 u1 = new User5(101, "soy uno", phones);
         // Create
         em.getTransaction().begin();
