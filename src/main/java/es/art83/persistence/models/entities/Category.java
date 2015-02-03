@@ -1,26 +1,30 @@
 package es.art83.persistence.models.entities;
 
 public class Category {
-    private int id;
+    //Clave primaria
+    private Integer id;
 
     private String name;
 
     private String description;
+    
+    //Atributo que no tiene persistencia
+    private String volatil;
 
     public Category() {
     }
 
-    public Category(int id, String name, String description) {
+    public Category(Integer id, String name, String description) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,6 +42,14 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getVolatil() {
+        return volatil;
+    }
+
+    public void setVolatil(String volatil) {
+        this.volatil = volatil;
     }
 
     @Override

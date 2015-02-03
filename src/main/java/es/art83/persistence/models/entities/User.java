@@ -1,5 +1,7 @@
 package es.art83.persistence.models.entities;
 
+import java.util.List;
+
 public class User {
     private int id;
 
@@ -7,28 +9,36 @@ public class User {
 
     private String password;
 
-    private int level;
+    //Relación embebida
+    private Address detail;
 
-    private UserDetail detail;
+    //Relación unidireccional: 1:1
+    //relación mapeada aqui
+    //Se aplica cascada
+    private Phone mainPhone;
 
-    public User(int id, String name, String password) {
-        this.setId(id);
-        this.setName(name);
-        this.setPassword(password);
-        this.setLevel(1);
+    //Relación unidireccional: 1:n
+    //relación mapeada en la otra entidad
+    //Se aplica cascada
+    private List<Phone> phones;
+
+    //Relación bidireccional: 1:1
+    //relación mapeada en la otra entidad
+    private Vehicle mainVehicle;
+
+    //Relación bidireccional: 1:n
+    //relación mapeada en la otra entidad
+    private List<Vehicle> vehicles;
+
+    public User(String name, String password, Address detail) {
+        super();
+        this.name = name;
+        this.password = password;
+        this.detail = detail;
     }
 
     public User() {
-        this(0, "", "");
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+   }
 
     public String getName() {
         return name;
@@ -46,29 +56,56 @@ public class User {
         this.password = password;
     }
 
-    public int getLevel() {
-        return level;
+    public Address getDetail() {
+        return detail;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public UserDetail getDetail() {
-        return this.detail;
-    }
-
-    public void setDetail(UserDetail detail) {
+    public void setDetail(Address detail) {
         this.detail = detail;
+    }
+
+    public Phone getMainPhone() {
+        return mainPhone;
+    }
+
+    public void setMainPhone(Phone mainPhone) {
+        this.mainPhone = mainPhone;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
+    public Vehicle getMainVehicle() {
+        return mainVehicle;
+    }
+
+    public void setMainVehicle(Vehicle mainVehicle) {
+        this.mainVehicle = mainVehicle;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
     public String toString() {
-        String d = ", detail=(null)";
-        if (this.detail != null)
-            d = ", detail=(" + this.detail.toString() + ")";
-        return "User [id=" + id + ", name=" + name + ", password=" + password + ", level=" + level
-                + d + "]";
+        return "User [id=" + id + ", name=" + name + ", password=" + password + ", detail="
+                + detail + ", mainPhone=" + mainPhone + ", phones=" + phones + ", mainVehicle="
+                + mainVehicle + ", vehicles=" + vehicles + "]";
     }
 
+    
 }
