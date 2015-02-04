@@ -14,9 +14,9 @@ import es.art83.persistence.models.entities.Address;
 import es.art83.persistence.models.entities.Category;
 import es.art83.persistence.models.entities.User;
 
-public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDAO {
+public class UserDAOJdbc extends GenericDAOJdbc<User, Integer> implements UserDAO {
 
-    private Logger log = LogManager.getLogger(UserDAOJDBC.class);
+    private Logger log = LogManager.getLogger(UserDAOJdbc.class);
 
     private User create(ResultSet resultSet) {
         User user;

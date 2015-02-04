@@ -5,10 +5,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import es.art83.persistence.models.daos.GenericDAO;
 
-public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
+public abstract class GenericDAOJdbc<T, ID> implements GenericDAO<T, ID> {
 
     protected static final String SQL_SELECT_ID = "SELECT * FROM %s WHERE ID=%d";
 
@@ -18,31 +19,29 @@ public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
 
     protected static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID()";
 
-    public void logError(String msg) {
-        LogManager.getLogger(this.getClass().getName()).error(msg);
-    }
+    private Logger log = LogManager.getLogger(GenericDAOJdbc.class);
 
     public ResultSet query(String sql) {
         try {
-            Statement statement = DAOJDBCFactory.getConnection().createStatement();
+            Statement statement = DAOJdbcFactory.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            LogManager.getLogger(this.getClass().getName()).debug("Query: " + sql);
+            this.log.debug("Query: " + sql);
             return resultSet;
         } catch (SQLException e) {
-            this.logError("Query SQL: ---" + sql + "---");
-            this.logError(e.getMessage());
+            this.log.error("Query SQL: ---" + sql + "---");
+            this.log.error(e.getMessage());
         }
         return null;
     }
 
     public void updateSql(String sql) {
         try {
-            Statement statement = DAOJDBCFactory.getConnection().createStatement();
+            Statement statement = DAOJdbcFactory.getConnection().createStatement();
             statement.executeUpdate(sql);
-            LogManager.getLogger(this.getClass().getName()).debug("UpdateSql: " + sql);
+            this.log.debug("UpdateSql: " + sql);
         } catch (SQLException e) {
-            this.logError("Update SQL: ---" + sql + "---");
-            this.logError(e.getMessage());
+            this.log.error("Update SQL: ---" + sql + "---");
+            this.log.error(e.getMessage());
         }
     }
 
@@ -52,8 +51,8 @@ public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
             resulSet.next();
             return resulSet.getInt(1);
         } catch (SQLException e) {
-            this.logError("Query SQL: ---" + SQL_SELECT_LAST_ID + "---");
-            this.logError(e.getMessage());
+            this.log.error("Query SQL: ---" + SQL_SELECT_LAST_ID + "---");
+            this.log.error(e.getMessage());
         }
         return -1;
     }

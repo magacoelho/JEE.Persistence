@@ -16,7 +16,7 @@ import es.art83.persistence.models.daos.VehicleDAO;
 import es.art83.persistence.models.entities.Category;
 import es.art83.persistence.models.entities.User;
 
-public class DAOJDBCFactory extends DAOFactory {
+public class DAOJdbcFactory extends DAOFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
     private static final String URL = "jdbc:mysql://localhost:3306/jee";
@@ -36,10 +36,10 @@ public class DAOJDBCFactory extends DAOFactory {
                 connection = DriverManager.getConnection(URL, USER, PASS);
             }
         } catch (ClassNotFoundException e) {
-            LogManager.getLogger(DAOJDBCFactory.class).error(
+            LogManager.getLogger(DAOJdbcFactory.class).error(
                     "Problemas con el driver: " + e.getMessage());
         } catch (SQLException e) {
-            LogManager.getLogger(DAOJDBCFactory.class).error(
+            LogManager.getLogger(DAOJdbcFactory.class).error(
                     "Problemas con la BD: " + e.getMessage());
         }
         return connection;
@@ -50,40 +50,37 @@ public class DAOJDBCFactory extends DAOFactory {
             Statement statement = getConnection().createStatement();
             statement.executeUpdate(String.format(DROP_TABLE, User.TABLE));
             statement.executeUpdate(String.format(DROP_TABLE, Category.TABLE));
-            statement.executeUpdate(CategoryDAOJDBC.sqlToCreateTable());
-            statement.executeUpdate(UserDAOJDBC.sqlToCreateTable());
+            statement.executeUpdate(CategoryDAOJdbc.sqlToCreateTable());
+            statement.executeUpdate(UserDAOJdbc.sqlToCreateTable());
         } catch (SQLException e) {
-            LogManager.getLogger(DAOJDBCFactory.class).error("Drop tables: " + e.getMessage());
+            LogManager.getLogger(DAOJdbcFactory.class).error("Drop tables: " + e.getMessage());
         }
     }
 
     @Override
     public UserDAO getUserDAO() {
         // TODO Auto-generated method stub
-        return new UserDAOJDBC();
+        return new UserDAOJdbc();
     }
 
     @Override
     public CategoryDAO getCategoryDAO() {
-        return new CategoryDAOJDBC();
+        return new CategoryDAOJdbc();
     }
 
     @Override
     public BoatDAO getBoatDAO() {
-        // TODO Auto-generated method stub
-        return null;
+        return new BoatDAOJdbc();
     }
 
     @Override
     public VehicleDAO getVehicleDAO() {
-        // TODO Auto-generated method stub
-        return null;
+        return new VehicleDAOJdbc();
     }
 
     @Override
     public PhoneDAO getPhoneDAO() {
-        // TODO Auto-generated method stub
-        return null;
+        return new PhoneDAOJdbc();
     }
 
 }

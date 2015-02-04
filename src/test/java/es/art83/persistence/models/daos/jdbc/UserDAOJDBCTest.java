@@ -21,8 +21,8 @@ public class UserDAOJDBCTest {
 
     @BeforeClass
     public static void beforeClass() {
-        DAOFactory.setFactory(new DAOJDBCFactory());
-        DAOJDBCFactory.dropAndCreateTables();
+        DAOFactory.setFactory(new DAOJdbcFactory());
+        DAOJdbcFactory.dropAndCreateTables();
     }
 
     @Before
@@ -67,7 +67,7 @@ public class UserDAOJDBCTest {
 
     @After
     public void after() {
-        DAOJDBCFactory.dropAndCreateTables();
+        DAOJdbcFactory.dropAndCreateTables();
     }
 
 }

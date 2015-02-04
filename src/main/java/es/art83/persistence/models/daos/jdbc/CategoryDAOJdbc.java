@@ -11,13 +11,8 @@ import org.apache.logging.log4j.Logger;
 import es.art83.persistence.models.daos.CategoryDAO;
 import es.art83.persistence.models.entities.Category;
 
-public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implements CategoryDAO {
-
-    private static final String INSERT = "INSERT INTO %s (%s,%s,%s) VALUES (%d,'%s','%s')";
-
-    private static final String UPDATE = "UPDATE %s SET %s='%s', %s='%s' WHERE ID=%d";
-
-    private Logger log = LogManager.getLogger(CategoryDAOJDBC.class);
+public class CategoryDAOJdbc extends GenericDAOJdbc<Category, Integer> implements CategoryDAO {
+    private Logger log = LogManager.getLogger(CategoryDAOJdbc.class);
 
     private Category create(ResultSet resultSet) {
         try {
@@ -32,16 +27,19 @@ public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implement
         return null;
     }
 
-    private static final String CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255), "
+    private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255), "
             + "%s VARCHAR(255), PRIMARY KEY (%s))";
+
     public static String sqlToCreateTable() {
-        return String.format(CREATE_TABLE, Category.TABLE, Category.ID, Category.DESCRIPTION,
+        return String.format(SQL_CREATE_TABLE, Category.TABLE, Category.ID, Category.DESCRIPTION,
                 Category.NAME, Category.ID);
     }
 
+    private static final String SQL_INSERT = "INSERT INTO %s (%s,%s,%s) VALUES (%d,'%s','%s')";
+
     @Override
     public void create(Category category) {
-        this.updateSql(String.format(INSERT, Category.TABLE, Category.ID, Category.DESCRIPTION,
+        this.updateSql(String.format(SQL_INSERT, Category.TABLE, Category.ID, Category.DESCRIPTION,
                 Category.NAME, category.getId(), category.getDescription(), category.getName()));
     }
 
@@ -51,9 +49,11 @@ public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implement
         return this.create(resultSet);
     }
 
+    private static final String SQL_UPDATE = "UPDATE %s SET %s='%s', %s='%s' WHERE ID=%d";
+
     @Override
     public void update(Category category) {
-        this.updateSql(String.format(UPDATE, Category.TABLE, Category.NAME, category.getName(),
+        this.updateSql(String.format(SQL_UPDATE, Category.TABLE, Category.NAME, category.getName(),
                 Category.DESCRIPTION, category.getDescription(), category.getId()));
     }
 
