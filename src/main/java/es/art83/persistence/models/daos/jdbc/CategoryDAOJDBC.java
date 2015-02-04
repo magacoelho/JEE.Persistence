@@ -47,7 +47,7 @@ public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implement
 
     @Override
     public Category read(Integer id) {
-        ResultSet resultSet = this.query(String.format(SELECT, Category.TABLE, id));
+        ResultSet resultSet = this.query(String.format(SQL_SELECT_ID, Category.TABLE, id));
         return this.create(resultSet);
     }
 
@@ -58,14 +58,14 @@ public class CategoryDAOJDBC extends GenericDAOJDBC<Category, Integer> implement
     }
 
     @Override
-    public void deleteByID(Integer id) {
-        this.updateSql(String.format(DELETE, Category.TABLE, id));
+    public void deleteById(Integer id) {
+        this.updateSql(String.format(SQL_DELETE_ID, Category.TABLE, id));
     }
 
     @Override
     public List<Category> findAll() {
         List<Category> list = new ArrayList<Category>();
-        ResultSet resultSet = this.query(String.format(SELECT_ALL, Category.TABLE));
+        ResultSet resultSet = this.query(String.format(SQL_SELECT_ALL, Category.TABLE));
         Category category = this.create(resultSet);
         while (category != null) {
             list.add(category);

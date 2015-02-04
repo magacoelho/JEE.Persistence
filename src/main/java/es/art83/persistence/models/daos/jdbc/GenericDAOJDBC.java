@@ -10,13 +10,13 @@ import es.art83.persistence.models.daos.GenericDAO;
 
 public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
 
-    protected static final String SELECT = "SELECT * FROM %s WHERE ID=%d";
+    protected static final String SQL_SELECT_ID = "SELECT * FROM %s WHERE ID=%d";
 
-    protected static final String SELECT_ALL = "SELECT * FROM %s";
+    protected static final String SQL_SELECT_ALL = "SELECT * FROM %s";
 
-    protected static final String DELETE = "DELETE FROM %s WHERE ID=%d";
+    protected static final String SQL_DELETE_ID = "DELETE FROM %s WHERE ID=%d";
 
-    protected static final String ID = "SELECT LAST_INSERT_ID()";
+    protected static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID()";
 
     public void logError(String msg) {
         LogManager.getLogger(this.getClass().getName()).error(msg);
@@ -46,13 +46,13 @@ public abstract class GenericDAOJDBC<T, ID> implements GenericDAO<T, ID> {
         }
     }
 
-    public int geId() {
-        ResultSet resulSet = this.query(ID);
+    public int autoId() {
+        ResultSet resulSet = this.query(SQL_SELECT_LAST_ID);
         try {
             resulSet.next();
             return resulSet.getInt(1);
         } catch (SQLException e) {
-            this.logError("Query SQL: ---" + ID + "---");
+            this.logError("Query SQL: ---" + SQL_SELECT_LAST_ID + "---");
             this.logError(e.getMessage());
         }
         return -1;

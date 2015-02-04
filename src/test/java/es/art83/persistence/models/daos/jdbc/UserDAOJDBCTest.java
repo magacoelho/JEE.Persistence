@@ -51,7 +51,7 @@ public class UserDAOJDBCTest {
 
     @Test
     public void testDeleteByID() {
-        dao.deleteByID(user.getId());
+        dao.deleteById(user.getId());
         assertNull(dao.read(user.getId()));
         assertNull(DAOFactory.getFactory().getCategoryDAO().read(user.getCategory().getId()));
     }

@@ -32,9 +32,6 @@ public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDA
                     Category category = DAOFactory.getFactory().getCategoryDAO().read(categoryId);
                     user.setCategory(category);
                 }
-                // Reconstruir Phone
-                // Reconstruir Boat
-                // Recostruir Vehicle
                 return user;
             }
         } catch (SQLException e) {
@@ -43,17 +40,17 @@ public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDA
         return null;
     }
 
-    private static final String CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL AUTO_INCREMENT, %s VARCHAR(255), "
+    private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL AUTO_INCREMENT, %s VARCHAR(255), "
             + "%s VARCHAR(255), %s VARCHAR(255), %s VARCHAR(255), %s INT, PRIMARY KEY (%s), "
             + "FOREIGN KEY(%s) REFERENCES %s(ID) )";
 
     public static String sqlToCreateTable() {
         return String
-                .format(CREATE_TABLE, User.TABLE, User.ID, User.NAME, User.PASSWORD, Address.CITY,
+                .format(SQL_CREATE_TABLE, User.TABLE, User.ID, User.NAME, User.PASSWORD, Address.CITY,
                         Address.STREET, User.CATEGORY, User.ID, User.CATEGORY, Category.TABLE);
     }
 
-    private static final String INSERT = "INSERT INTO %s (%s,%s,%s,%s,%s) VALUES ('%s','%s','%s','%s',%d)";
+    private static final String SQL_INSERT = "INSERT INTO %s (%s,%s,%s,%s,%s) VALUES ('%s','%s','%s','%s',%d)";
 
     @Override
     public void create(User user) {
@@ -63,25 +60,29 @@ public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDA
             DAOFactory.getFactory().getCategoryDAO().create(user.getCategory());
             categoriaId = user.getCategory().getId();
         }
-        this.updateSql(String.format(INSERT, User.TABLE, User.NAME, User.PASSWORD, Address.CITY,
+        this.updateSql(String.format(SQL_INSERT, User.TABLE, User.NAME, User.PASSWORD, Address.CITY,
                 Address.STREET, User.CATEGORY, user.getName(), user.getPassword(), user
                         .getAddress().getCity(), user.getAddress().getStreet(), categoriaId));
-        user.setId(this.geId());
+        user.setId(this.autoId());
     }
 
     @Override
     public User read(Integer id) {
-        ResultSet resultSet = this.query(String.format(SELECT, User.TABLE, id));
+        ResultSet resultSet = this.query(String.format(SQL_SELECT_ID, User.TABLE, id));
         return this.create(resultSet);
     }
 
-    private static final String UPDATE = "UPDATE %s SET %s='%s', %s='%s', %s='%s', %s='%s', %s=%d WHERE ID=%d";
+    private static final String SQL_UPDATE = "UPDATE %s SET %s='%s', %s='%s', %s='%s', %s='%s', %s=%d WHERE ID=%d";
 
     @Override
     public void update(User user) {
         assert user.getAddress() != null;
-        Integer categoryId;
+        Integer categoryId, oldCategoryId = null;
         if (user.getCategory() == null) {
+            User oldUser = this.read(user.getId());
+            if (oldUser.getCategory() != null) {
+                oldCategoryId = oldUser.getCategory().getId();
+            }
             categoryId = null;
         } else {
             categoryId = user.getCategory().getId();
@@ -91,22 +92,25 @@ public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDA
                 DAOFactory.getFactory().getCategoryDAO().update(user.getCategory());
             }
         }
-        this.updateSql(String.format(UPDATE, User.TABLE, User.NAME, user.getName(), User.PASSWORD,
+        this.updateSql(String.format(SQL_UPDATE, User.TABLE, User.NAME, user.getName(), User.PASSWORD,
                 user.getPassword(), Address.CITY, user.getAddress().getCity(), Address.STREET, user
                         .getAddress().getStreet(), User.CATEGORY, categoryId, user.getId()));
+        if (oldCategoryId != null) {
+            DAOFactory.getFactory().getCategoryDAO().deleteById(oldCategoryId);
+        }
     }
 
     @Override
-    public void deleteByID(Integer id) {
+    public void deleteById(Integer id) {
         User userBD = this.read(id);
         if (userBD != null) {
             Integer categoryId = null;
             if (userBD.getCategory() != null) {
                 categoryId = userBD.getCategory().getId();
             }
-            this.updateSql(String.format(DELETE, User.TABLE, id));
+            this.updateSql(String.format(SQL_DELETE_ID, User.TABLE, id));
             if (categoryId != null) {
-                DAOFactory.getFactory().getCategoryDAO().deleteByID(userBD.getCategory().getId());
+                DAOFactory.getFactory().getCategoryDAO().deleteById(userBD.getCategory().getId());
             }
 
         }
@@ -115,7 +119,7 @@ public class UserDAOJDBC extends GenericDAOJDBC<User, Integer> implements UserDA
     @Override
     public List<User> findAll() {
         List<User> list = new ArrayList<User>();
-        ResultSet resultSet = this.query(String.format(SELECT_ALL, User.TABLE));
+        ResultSet resultSet = this.query(String.format(SQL_SELECT_ALL, User.TABLE));
         User user = this.create(resultSet);
         while (user != null) {
             list.add(user);

@@ -48,7 +48,7 @@ public class CategoryDAOJDBCTest {
 
     @Test
     public void testDeleteByID() {
-        dao.deleteByID(category.getId());
+        dao.deleteById(category.getId());
         assertNull(dao.read(category.getId()));
     }
 
