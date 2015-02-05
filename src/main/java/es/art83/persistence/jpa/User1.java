@@ -1,4 +1,4 @@
-package es.art83.bbdd.models.entities;
+package es.art83.persistence.jpa;
 
 import java.lang.String;
 
@@ -16,13 +16,13 @@ public class User1 {
     @Transient //No persistente
     private String volatil;
 
-    public User1() {
-        super();
-    }
-
     public User1(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+    
+    public User1() {
+        this(0,"");
     }
 
     public Integer getId() {

@@ -13,7 +13,7 @@ import es.art83.persistence.models.daos.CategoryDao;
 import es.art83.persistence.models.daos.DaoFactory;
 import es.art83.persistence.models.entities.Category;
 
-public class CategoryDAOJDBCTest {
+public class CategoryDaoJdbcTest {
     private CategoryDao dao;
 
     private Category category;

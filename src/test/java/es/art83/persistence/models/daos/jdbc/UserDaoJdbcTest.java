@@ -14,7 +14,7 @@ import es.art83.persistence.models.entities.Address;
 import es.art83.persistence.models.entities.Category;
 import es.art83.persistence.models.entities.User;
 
-public class UserDAOJDBCTest {
+public class UserDaoJdbcTest {
     private UserDao dao;
 
     private User user;

@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="BBDD" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>es.art83.bbdd.models.entities.User1</class>
+		<class>es.art83.persistence.jpa.User1</class>
 		<class>es.art83.bbdd.models.entities.User2</class>
 		<class>es.art83.bbdd.models.entities.Direction</class>
 		<class>es.art83.bbdd.models.entities.Phone1</class>

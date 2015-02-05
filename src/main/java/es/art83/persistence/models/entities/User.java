@@ -41,7 +41,7 @@ public class User {
     // relación mapeada aqui
     // Se aplica cascada
     @OneToOne(cascade = CascadeType.ALL)
-    @Column(name = CATEGORY)
+    //@Column(name = CATEGORY)
     private Category category;
 
     // Relación unidireccional: 1:0..n

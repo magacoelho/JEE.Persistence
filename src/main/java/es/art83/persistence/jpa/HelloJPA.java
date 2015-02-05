@@ -3,8 +3,6 @@ package es.art83.persistence.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import es.art83.bbdd.models.entities.User1;
-
 public class HelloJPA {
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
