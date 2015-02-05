@@ -2,8 +2,6 @@ package es.art83.persistence.models.daos.jdbc;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -33,8 +31,7 @@ public class CategoryDaoJdbcTest {
 
     @Test
     public void testRead() {
-        Category categoryBD = dao.read(category.getId());
-        assertEquals(category, categoryBD);
+        assertEquals(category, dao.read(category.getId()));
     }
 
     @Test
@@ -42,8 +39,7 @@ public class CategoryDaoJdbcTest {
         category.setName("other");
         category.setDescription("other");
         dao.update(category);
-        Category categoryBD = dao.read(category.getId());
-        assertEquals(category, categoryBD);
+        assertEquals(category, dao.read(category.getId()));
     }
 
     @Test
@@ -56,12 +52,11 @@ public class CategoryDaoJdbcTest {
     public void testFindAll() {
         dao.create(new Category(2, "2", "2"));
         dao.create(new Category(3, "3", "3"));
-        List<Category> categories = dao.findAll();
-        assertEquals(3, categories.size());
+        assertEquals(3, dao.findAll().size());
     }
-    
+
     @After
-    public void after(){
+    public void after() {
         DaoJdbcFactory.dropAndCreateTables();
     }
 
