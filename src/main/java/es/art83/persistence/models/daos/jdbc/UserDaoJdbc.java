@@ -8,15 +8,15 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.art83.persistence.models.daos.DAOFactory;
-import es.art83.persistence.models.daos.UserDAO;
+import es.art83.persistence.models.daos.DaoFactory;
+import es.art83.persistence.models.daos.UserDao;
 import es.art83.persistence.models.entities.Address;
 import es.art83.persistence.models.entities.Category;
 import es.art83.persistence.models.entities.User;
 
-public class UserDAOJdbc extends GenericDAOJdbc<User, Integer> implements UserDAO {
+public class UserDaoJdbc extends GenericDaoJdbc<User, Integer> implements UserDao {
 
-    private Logger log = LogManager.getLogger(UserDAOJdbc.class);
+    private Logger log = LogManager.getLogger(UserDaoJdbc.class);
 
     private User create(ResultSet resultSet) {
         User user;
@@ -29,7 +29,7 @@ public class UserDAOJdbc extends GenericDAOJdbc<User, Integer> implements UserDA
                 // Reconstruir Category
                 Integer categoryId = resultSet.getInt(User.CATEGORY);
                 if (categoryId > 0) {
-                    Category category = DAOFactory.getFactory().getCategoryDAO().read(categoryId);
+                    Category category = DaoFactory.getFactory().getCategoryDao().read(categoryId);
                     user.setCategory(category);
                 }
                 return user;
@@ -57,7 +57,7 @@ public class UserDAOJdbc extends GenericDAOJdbc<User, Integer> implements UserDA
         assert user.getAddress() != null;
         Integer categoriaId = null;
         if (user.getCategory() != null) {
-            DAOFactory.getFactory().getCategoryDAO().create(user.getCategory());
+            DaoFactory.getFactory().getCategoryDao().create(user.getCategory());
             categoriaId = user.getCategory().getId();
         }
         this.updateSql(String.format(SQL_INSERT, User.TABLE, User.NAME, User.PASSWORD, Address.CITY,
@@ -86,17 +86,17 @@ public class UserDAOJdbc extends GenericDAOJdbc<User, Integer> implements UserDA
             categoryId = null;
         } else {
             categoryId = user.getCategory().getId();
-            if (DAOFactory.getFactory().getCategoryDAO().read(categoryId) == null) {
-                DAOFactory.getFactory().getCategoryDAO().create(user.getCategory());
+            if (DaoFactory.getFactory().getCategoryDao().read(categoryId) == null) {
+                DaoFactory.getFactory().getCategoryDao().create(user.getCategory());
             } else {
-                DAOFactory.getFactory().getCategoryDAO().update(user.getCategory());
+                DaoFactory.getFactory().getCategoryDao().update(user.getCategory());
             }
         }
         this.updateSql(String.format(SQL_UPDATE, User.TABLE, User.NAME, user.getName(), User.PASSWORD,
                 user.getPassword(), Address.CITY, user.getAddress().getCity(), Address.STREET, user
                         .getAddress().getStreet(), User.CATEGORY, categoryId, user.getId()));
         if (oldCategoryId != null) {
-            DAOFactory.getFactory().getCategoryDAO().deleteById(oldCategoryId);
+            DaoFactory.getFactory().getCategoryDao().deleteById(oldCategoryId);
         }
     }
 
@@ -110,7 +110,7 @@ public class UserDAOJdbc extends GenericDAOJdbc<User, Integer> implements UserDA
             }
             this.updateSql(String.format(SQL_DELETE_ID, User.TABLE, id));
             if (categoryId != null) {
-                DAOFactory.getFactory().getCategoryDAO().deleteById(userBD.getCategory().getId());
+                DaoFactory.getFactory().getCategoryDao().deleteById(userBD.getCategory().getId());
             }
 
         }

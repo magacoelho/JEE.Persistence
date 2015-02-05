@@ -7,9 +7,9 @@ import java.sql.Statement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.art83.persistence.models.daos.GenericDAO;
+import es.art83.persistence.models.daos.GenericDao;
 
-public abstract class GenericDAOJdbc<T, ID> implements GenericDAO<T, ID> {
+public abstract class GenericDaoJdbc<T, ID> implements GenericDao<T, ID> {
 
     protected static final String SQL_SELECT_ID = "SELECT * FROM %s WHERE ID=%d";
 
@@ -19,11 +19,11 @@ public abstract class GenericDAOJdbc<T, ID> implements GenericDAO<T, ID> {
 
     protected static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID()";
 
-    private Logger log = LogManager.getLogger(GenericDAOJdbc.class);
+    private Logger log = LogManager.getLogger(GenericDaoJdbc.class);
 
     public ResultSet query(String sql) {
         try {
-            Statement statement = DAOJdbcFactory.getConnection().createStatement();
+            Statement statement = DaoJdbcFactory.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             this.log.debug("Query: " + sql);
             return resultSet;
@@ -36,7 +36,7 @@ public abstract class GenericDAOJdbc<T, ID> implements GenericDAO<T, ID> {
 
     public void updateSql(String sql) {
         try {
-            Statement statement = DAOJdbcFactory.getConnection().createStatement();
+            Statement statement = DaoJdbcFactory.getConnection().createStatement();
             statement.executeUpdate(sql);
             this.log.debug("UpdateSql: " + sql);
         } catch (SQLException e) {

@@ -7,16 +7,16 @@ import java.sql.Statement;
 
 import org.apache.logging.log4j.LogManager;
 
-import es.art83.persistence.models.daos.BoatDAO;
-import es.art83.persistence.models.daos.CategoryDAO;
-import es.art83.persistence.models.daos.DAOFactory;
-import es.art83.persistence.models.daos.PhoneDAO;
-import es.art83.persistence.models.daos.UserDAO;
-import es.art83.persistence.models.daos.VehicleDAO;
+import es.art83.persistence.models.daos.BoatDao;
+import es.art83.persistence.models.daos.CategoryDao;
+import es.art83.persistence.models.daos.DaoFactory;
+import es.art83.persistence.models.daos.PhoneDao;
+import es.art83.persistence.models.daos.UserDao;
+import es.art83.persistence.models.daos.VehicleDao;
 import es.art83.persistence.models.entities.Category;
 import es.art83.persistence.models.entities.User;
 
-public class DAOJdbcFactory extends DAOFactory {
+public class DaoJdbcFactory extends DaoFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
     private static final String URL = "jdbc:mysql://localhost:3306/jee";
@@ -36,10 +36,10 @@ public class DAOJdbcFactory extends DAOFactory {
                 connection = DriverManager.getConnection(URL, USER, PASS);
             }
         } catch (ClassNotFoundException e) {
-            LogManager.getLogger(DAOJdbcFactory.class).error(
+            LogManager.getLogger(DaoJdbcFactory.class).error(
                     "Problemas con el driver: " + e.getMessage());
         } catch (SQLException e) {
-            LogManager.getLogger(DAOJdbcFactory.class).error(
+            LogManager.getLogger(DaoJdbcFactory.class).error(
                     "Problemas con la BD: " + e.getMessage());
         }
         return connection;
@@ -50,37 +50,37 @@ public class DAOJdbcFactory extends DAOFactory {
             Statement statement = getConnection().createStatement();
             statement.executeUpdate(String.format(DROP_TABLE, User.TABLE));
             statement.executeUpdate(String.format(DROP_TABLE, Category.TABLE));
-            statement.executeUpdate(CategoryDAOJdbc.sqlToCreateTable());
-            statement.executeUpdate(UserDAOJdbc.sqlToCreateTable());
+            statement.executeUpdate(CategoryDaoJdbc.sqlToCreateTable());
+            statement.executeUpdate(UserDaoJdbc.sqlToCreateTable());
         } catch (SQLException e) {
-            LogManager.getLogger(DAOJdbcFactory.class).error("Drop tables: " + e.getMessage());
+            LogManager.getLogger(DaoJdbcFactory.class).error("Drop tables: " + e.getMessage());
         }
     }
 
     @Override
-    public UserDAO getUserDAO() {
+    public UserDao getUserDao() {
         // TODO Auto-generated method stub
-        return new UserDAOJdbc();
+        return new UserDaoJdbc();
     }
 
     @Override
-    public CategoryDAO getCategoryDAO() {
-        return new CategoryDAOJdbc();
+    public CategoryDao getCategoryDao() {
+        return new CategoryDaoJdbc();
     }
 
     @Override
-    public BoatDAO getBoatDAO() {
-        return new BoatDAOJdbc();
+    public BoatDao getBoatDao() {
+        return new BoatDaoJdbc();
     }
 
     @Override
-    public VehicleDAO getVehicleDAO() {
-        return new VehicleDAOJdbc();
+    public VehicleDao getVehicleDao() {
+        return new VehicleDaoJdbc();
     }
 
     @Override
-    public PhoneDAO getPhoneDAO() {
-        return new PhoneDAOJdbc();
+    public PhoneDao getPhoneDao() {
+        return new PhoneDaoJdbc();
     }
 
 }

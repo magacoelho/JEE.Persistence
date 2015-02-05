@@ -2,25 +2,25 @@ package es.art83.persistence.models.daos.jdbc;
 
 import java.util.List;
 
-import es.art83.persistence.models.daos.BoatDAO;
-import es.art83.persistence.models.entities.Boat;
+import es.art83.persistence.models.daos.VehicleDao;
+import es.art83.persistence.models.entities.Vehicle;
 
-public class BoatDAOJdbc extends GenericDAOJdbc<Boat,Integer>implements BoatDAO {
+public class VehicleDaoJdbc extends GenericDaoJdbc<Vehicle, Integer> implements VehicleDao {
 
     @Override
-    public void create(Boat entity) {
+    public void create(Vehicle entity) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public Boat read(Integer id) {
+    public Vehicle read(Integer id) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void update(Boat entity) {
+    public void update(Vehicle entity) {
         // TODO Auto-generated method stub
 
     }
@@ -32,7 +32,7 @@ public class BoatDAOJdbc extends GenericDAOJdbc<Boat,Integer>implements BoatDAO 
     }
 
     @Override
-    public List<Boat> findAll() {
+    public List<Vehicle> findAll() {
         // TODO Auto-generated method stub
         return null;
     }

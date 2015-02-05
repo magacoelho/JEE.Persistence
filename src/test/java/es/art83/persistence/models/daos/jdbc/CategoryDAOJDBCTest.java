@@ -9,25 +9,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import es.art83.persistence.models.daos.CategoryDAO;
-import es.art83.persistence.models.daos.DAOFactory;
+import es.art83.persistence.models.daos.CategoryDao;
+import es.art83.persistence.models.daos.DaoFactory;
 import es.art83.persistence.models.entities.Category;
 
 public class CategoryDAOJDBCTest {
-    private CategoryDAO dao;
+    private CategoryDao dao;
 
     private Category category;
 
     @BeforeClass
     public static void beforeClass() {
-        DAOFactory.setFactory(new DAOJdbcFactory());
-        DAOJdbcFactory.dropAndCreateTables();
+        DaoFactory.setFactory(new DaoJdbcFactory());
+        DaoJdbcFactory.dropAndCreateTables();
     }
 
     @Before
     public void before() {
         this.category = new Category(1, "name", "description");
-        dao = DAOFactory.getFactory().getCategoryDAO();
+        dao = DaoFactory.getFactory().getCategoryDao();
         dao.create(category);
     }
 
@@ -62,7 +62,7 @@ public class CategoryDAOJDBCTest {
     
     @After
     public void after(){
-        DAOJdbcFactory.dropAndCreateTables();
+        DaoJdbcFactory.dropAndCreateTables();
     }
 
 }

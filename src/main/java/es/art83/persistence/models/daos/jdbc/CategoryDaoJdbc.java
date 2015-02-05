@@ -8,11 +8,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import es.art83.persistence.models.daos.CategoryDAO;
+import es.art83.persistence.models.daos.CategoryDao;
 import es.art83.persistence.models.entities.Category;
 
-public class CategoryDAOJdbc extends GenericDAOJdbc<Category, Integer> implements CategoryDAO {
-    private Logger log = LogManager.getLogger(CategoryDAOJdbc.class);
+public class CategoryDaoJdbc extends GenericDaoJdbc<Category, Integer> implements CategoryDao {
+    private Logger log = LogManager.getLogger(CategoryDaoJdbc.class);
 
     private Category create(ResultSet resultSet) {
         try {

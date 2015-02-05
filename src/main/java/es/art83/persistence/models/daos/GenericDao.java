@@ -2,7 +2,7 @@ package es.art83.persistence.models.daos;
 
 import java.util.List;
 
-public interface GenericDAO<T, ID> {
+public interface GenericDao<T, ID> {
 
     void create(T entity);
 
