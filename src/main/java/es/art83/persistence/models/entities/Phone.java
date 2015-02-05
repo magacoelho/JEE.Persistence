@@ -6,12 +6,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import es.art83.persistence.models.utils.PhoneType;
 
-@Entity
-@Table(name = Phone.TABLE)
+@Entity(name = Phone.TABLE)
 public class Phone {
     public static final String TABLE = "phone";
 

@@ -8,12 +8,11 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = User.TABLE)
+@Entity(name = User.TABLE)
 public class User {
     public static final String TABLE = "user";
 
@@ -41,7 +40,7 @@ public class User {
     // relación mapeada aqui
     // Se aplica cascada
     @OneToOne(cascade = CascadeType.ALL)
-    //@Column(name = CATEGORY)
+    @JoinColumn(name=CATEGORY)
     private Category category;
 
     // Relación unidireccional: 1:0..n

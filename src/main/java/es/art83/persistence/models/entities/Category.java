@@ -3,11 +3,9 @@ package es.art83.persistence.models.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table(name = Category.TABLE)
+@Entity(name = Category.TABLE)
 public class Category {
     public static final String TABLE = "category";
 

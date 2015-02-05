@@ -4,7 +4,6 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="BBDD" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <non-jta-data-source>bbdd</non-jta-data-source>
 		<class>es.art83.persistence.jpa.User1</class>
 		<class>es.art83.persistence.models.entities.User</class>
 		<class>es.art83.persistence.models.entities.Phone</class>
@@ -12,6 +11,8 @@
 		<class>es.art83.persistence.models.entities.Category</class>
 		<class>es.art83.persistence.models.entities.Vehicle</class>
 		<class>es.art83.persistence.models.entities.Boat</class>
+		<class>es.art83.persistence.jpa.User2</class>
+		<class>es.art83.persistence.jpa.User3</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> <!--drop-and-create-tables   none-->
             <property name="eclipselink.logging.level" value="INFO" /> <!-- OFF,WARNING,INFO,FINE,ALL -->
