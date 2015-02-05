@@ -6,9 +6,9 @@ import javax.persistence.Embeddable;
 public class Address {
     public static final String CITY = "CITY";
 
-    public static final String STREET = "STREET";
-
     private String city;
+
+    public static final String STREET = "STREET";
 
     private String street;
 

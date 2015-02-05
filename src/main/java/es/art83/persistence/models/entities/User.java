@@ -3,6 +3,7 @@ package es.art83.persistence.models.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,42 +19,43 @@ public class User {
 
     public static final String ID = "ID";
 
-    public static final String NAME = "NAME";
-
-    public static final String PASSWORD = "PASSWORD";
-
-    public static final String CATEGORY = "CATEGORY_ID";
-
     @Id
     @GeneratedValue
+    @Column(name = ID)
     private Integer id;
 
+    public static final String NAME = "NAME";
+    @Column(name = NAME)
     private String name;
 
+    public static final String PASSWORD = "PASSWORD";
+    @Column(name = PASSWORD)
     private String password;
 
     // Relación embebida
     @Embedded
     private Address address;
 
-    // Relación unidireccional: 1:1
+    public static final String CATEGORY = "CATEGORY_ID";
+    // Relación unidireccional: 1:0..1
     // relación mapeada aqui
     // Se aplica cascada
     @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = CATEGORY)
     private Category category;
 
-    // Relación unidireccional: 1:n
+    // Relación unidireccional: 1:0..n
     // relación mapeada en una tabla de unión
     // Se aplica cascada
     @OneToMany(cascade = CascadeType.ALL)
     private List<Phone> phones;
 
-    // Relación bidireccional: 1:1
+    // Relación bidireccional: 1:0..1
     // relación mapeada en la otra entidad
     @OneToOne(mappedBy = "user")
     private Boat boat;
 
-    // Relación bidireccional: 1:n
+    // Relación bidireccional: 1:0..n
     // relación mapeada en la otra entidad
     @OneToMany(mappedBy = "user")
     private List<Vehicle> vehicles;

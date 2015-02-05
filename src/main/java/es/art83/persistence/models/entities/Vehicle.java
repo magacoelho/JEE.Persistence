@@ -15,22 +15,22 @@ public class Vehicle {
 
     public static final String ID = "ID";
 
-    public static final String IDENTIFICATION = "IDENTIFICATION";
-
-    public static final String DESCRIPTION = "DESCRIPTION";
-
-    public static final String USER_ID = "USER_ID";
-
     @Id
     @GeneratedValue
     @Column(name = ID)
     private Integer id;
 
+    public static final String IDENTIFICATION = "IDENTIFICATION";
+
     @Column(name = IDENTIFICATION)
     private String identification;
 
+    public static final String DESCRIPTION = "DESCRIPTION";
+
     @Column(name = DESCRIPTION)
     private String description;
+
+    public static final String USER_ID = "USER_ID";
 
     @ManyToOne
     @JoinColumn(name = USER_ID)

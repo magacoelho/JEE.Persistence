@@ -1,5 +1,6 @@
 package es.art83.persistence.models.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,18 +11,21 @@ import javax.persistence.Transient;
 public class Category {
     public static final String TABLE = "category";
 
+    // Clave primaria
     public static final String ID = "ID";
+
+    @Id
+    @Column(name = ID)
+    private Integer id;
 
     public static final String NAME = "NAME";
 
-    public static final String DESCRIPTION = "DESCRIPTION";
-
-    // Clave primaria
-    @Id
-    private Integer id;
-
+    @Column(name = NAME)
     private String name;
 
+    public static final String DESCRIPTION = "DESCRIPTION";
+
+    @Column(name = DESCRIPTION)
     private String description;
 
     // Atributo que no tiene persistencia
@@ -73,7 +77,8 @@ public class Category {
     public boolean equals(Object obj) {
         assert obj != null;
         Category other = (Category) obj;
-        return id.equals(other.id) && name.equals(other.name) && description.equals(other.description);
+        return id.equals(other.id) && name.equals(other.name)
+                && description.equals(other.description);
     }
 
     @Override
