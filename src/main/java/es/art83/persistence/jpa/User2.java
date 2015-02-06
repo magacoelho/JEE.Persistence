@@ -2,11 +2,14 @@ package es.art83.persistence.jpa;
 
 import java.lang.Integer;
 import java.lang.String;
+import java.util.Arrays;
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Persistence;
@@ -28,6 +31,9 @@ public class User2 {
 
     @Column(name = "COLUMNA", length = 4, unique = true)
     private String cadena = "1234";
+
+    @Basic(optional = true, fetch = FetchType.LAZY)
+    private Byte[] bytes = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     public User2() {
         super();
@@ -69,11 +75,18 @@ public class User2 {
         this.cadena = cadena;
     }
 
+    public Byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(Byte[] bytes) {
+        this.bytes = bytes;
+    }
 
     @Override
     public String toString() {
         return "User2 [id=" + id + ", description=" + description + ", date=" + date + ", date2="
-                + date2 + ", cadena=" + cadena + "]";
+                + date2 + ", cadena=" + cadena + ", bytes=" + Arrays.toString(bytes) + "]";
     }
 
     public static void main(String[] args) {
