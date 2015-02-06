@@ -7,7 +7,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Persistence;
 
 @Entity
-@IdClass(User3PK.class)
+@IdClass(User3PK.class) 
 public class User3 {
     @Id
     private int part1;

@@ -6,10 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = Vehicle.TABLE)
+@Entity(name = Vehicle.TABLE)
 public class Vehicle {
     public static final String TABLE = "VEHICLE";
 

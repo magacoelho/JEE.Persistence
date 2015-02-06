@@ -4,6 +4,7 @@ import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
@@ -18,19 +19,15 @@ public class User2 {
     @GeneratedValue
     private Integer id;
 
-    private String description;
+    private String description = "descipcion";
 
     @Temporal(TemporalType.DATE)
-    private Date date;
-    
-    private java.sql.Date date2; 
+    private Date date = new Date();
 
+    private java.sql.Date date2 = new java.sql.Date(new Date().getTime());
 
-    public User2(String description, Date date, java.sql.Date date2) {
-        this.description = description;
-        this.date = date;
-        this.date2 = date2;
-    }
+    @Column(name = "COLUMNA", length = 4, unique = true)
+    private String cadena = "1234";
 
     public User2() {
         super();
@@ -55,7 +52,7 @@ public class User2 {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
     public java.sql.Date getDate2() {
         return date2;
     }
@@ -64,15 +61,25 @@ public class User2 {
         this.date2 = date2;
     }
 
+    public String getCadena() {
+        return cadena;
+    }
+
+    public void setCadena(String cadena) {
+        this.cadena = cadena;
+    }
+
+
     @Override
     public String toString() {
         return "User2 [id=" + id + ", description=" + description + ", date=" + date + ", date2="
-                + date2 + "]";
+                + date2 + ", cadena=" + cadena + "]";
     }
 
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        User2 u1 = new User2("2", new Date(),new java.sql.Date(new Date().getTime()));
+        User2 u1 = new User2();
+        u1.setDescription("esta es...");
         // Create
         em.getTransaction().begin();
         em.persist(u1);
