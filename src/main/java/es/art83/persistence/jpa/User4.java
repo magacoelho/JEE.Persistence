@@ -14,7 +14,7 @@ public class User4 {
     @Id
     private Integer id;
 
-    private String description;
+    private String content;
 
     @Embedded
     private Address adress;
@@ -23,9 +23,9 @@ public class User4 {
         super();
     }
 
-    public User4(Integer id, String description, Address adress) {
+    public User4(Integer id, String content, Address adress) {
         this.id = id;
-        this.description = description;
+        this.content = content;
         this.adress = adress;
     }
 
@@ -37,12 +37,12 @@ public class User4 {
         this.id = id;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getContent() {
+        return this.content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Address getAdress() {
@@ -55,7 +55,7 @@ public class User4 {
 
     @Override
     public String toString() {
-        return "User4 [id=" + id + ", description=" + description + ", adress=" + adress + "]";
+        return "User4 [id=" + id + ", content=" + content + ", adress=" + adress + "]";
     }
 
     public static void main(String[] args) {

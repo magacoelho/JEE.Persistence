@@ -2,35 +2,34 @@ package es.art83.persistence.jpa;
 
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 
 @Entity
-public class User5 {
+public class User8 {
     @Id
     private Integer id;
 
     private String description;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn
-    private Category category;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user8")
+    private List<Vehicle> vehicles;
 
-    public User5() {
+    public User8() {
         super();
     }
 
-    public User5(Integer id, String description, Category category) {
+    public User8(Integer id, String description) {
         super();
         this.id = id;
         this.description = description;
-        this.category = category;
     }
 
     public Integer getId() {
@@ -49,31 +48,35 @@ public class User5 {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     @Override
     public String toString() {
-        return "User5 [id=" + id + ", description=" + description + ", category=" + category + "]";
+        return "User8 [id=" + id + ", description=" + description + ", vehicles=" + vehicles + "]";
     }
 
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        User5 u = new User5(1, "Soy u", new Category("categoria"));
-        User5 u2 = new User5(2, "Soy u", null);
+        User8 u = new User8(1, "Soy u");
+        List<Vehicle> vehicles = new ArrayList<Vehicle>();
+        vehicles.add(new Vehicle("123", "Soy v", u));
+        vehicles.add(new Vehicle("456", "Soy v", u));
+        u.setVehicles(vehicles);
+        User8 u2 = new User8(2, "Soy u");
         // Create
         em.getTransaction().begin();
         em.persist(u);
         em.persist(u2);
         em.getTransaction().commit();
         // find
-        System.out.println(em.find(User5.class, 1));
-        System.out.println(em.find(User5.class, 2));
-        System.out.println(em.find(User5.class, 3));
+        System.out.println(em.find(User8.class, 1));
+        System.out.println(em.find(User8.class, 2));
+        System.out.println(em.find(User8.class, 3));
     }
 }

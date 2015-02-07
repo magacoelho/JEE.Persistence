@@ -11,6 +11,12 @@
 		<class>es.art83.persistence.jpa.Address</class>
 		<class>es.art83.persistence.jpa.User5</class>
 		<class>es.art83.persistence.jpa.Category</class>
+		<class>es.art83.persistence.jpa.User6</class>
+		<class>es.art83.persistence.jpa.Boat</class>
+		<class>es.art83.persistence.jpa.Phone</class>
+		<class>es.art83.persistence.jpa.User7</class>
+		<class>es.art83.persistence.jpa.User8</class>
+		<class>es.art83.persistence.jpa.Vehicle</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> <!--drop-and-create-tables   none-->
             <property name="eclipselink.logging.level" value="INFO" /> <!-- OFF,WARNING,INFO,FINE,ALL -->

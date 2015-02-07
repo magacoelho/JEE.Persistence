@@ -7,30 +7,26 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Persistence;
 
 @Entity
-public class User5 {
+public class User6 {
     @Id
     private Integer id;
 
     private String description;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn
-    private Category category;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user6")
+    private Boat boat;
 
-    public User5() {
+    public User6() {
         super();
     }
 
-    public User5(Integer id, String description, Category category) {
-        super();
+    public User6(Integer id, String description) {
         this.id = id;
         this.description = description;
-        this.category = category;
     }
 
     public Integer getId() {
@@ -49,31 +45,33 @@ public class User5 {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public Boat getBoat() {
+        return boat;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setBoat(Boat boat) {
+        this.boat = boat;
     }
 
     @Override
     public String toString() {
-        return "User5 [id=" + id + ", description=" + description + ", category=" + category + "]";
+        return "User6 [id=" + id + ", description=" + description + ", boat=" + boat + "]";
     }
 
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        User5 u = new User5(1, "Soy u", new Category("categoria"));
-        User5 u2 = new User5(2, "Soy u", null);
+        User6 u = new User6(1, "Soy u");
+        Boat boat = new Boat("boat", u);
+        u.setBoat(boat);
+        User6 u2 = new User6(2, "Soy u");
         // Create
         em.getTransaction().begin();
         em.persist(u);
         em.persist(u2);
         em.getTransaction().commit();
         // find
-        System.out.println(em.find(User5.class, 1));
-        System.out.println(em.find(User5.class, 2));
-        System.out.println(em.find(User5.class, 3));
+        System.out.println(em.find(User6.class, 1));
+        System.out.println(em.find(User6.class, 2));
+        System.out.println(em.find(User6.class, 3));
     }
 }
