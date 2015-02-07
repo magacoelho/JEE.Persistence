@@ -3,6 +3,7 @@ package es.art83.persistence.jpa;
 import java.lang.Integer;
 import java.lang.String;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class User5 {
 
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Category category;
 
     public User5() {
@@ -61,8 +62,8 @@ public class User5 {
 
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        User5 u = new User5(1, "Sou u", new Category("description"));
-        User5 u2 = new User5(2, "Sou u", null);
+        User5 u = new User5(1, "Soy u", new Category("categoria"));
+        User5 u2 = new User5(2, "Soy u", null);
         // Create
         em.getTransaction().begin();
         em.persist(u);
