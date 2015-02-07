@@ -8,11 +8,14 @@
 		<class>es.art83.persistence.models.entities.User</class>
 		<class>es.art83.persistence.models.entities.Phone</class>
 		<class>es.art83.persistence.models.entities.Address</class>
-		<class>es.art83.persistence.models.entities.Category</class>
 		<class>es.art83.persistence.models.entities.Vehicle</class>
 		<class>es.art83.persistence.models.entities.Boat</class>
 		<class>es.art83.persistence.jpa.User2</class>
 		<class>es.art83.persistence.jpa.User3</class>
+		<class>es.art83.persistence.jpa.User4</class>
+		<class>es.art83.persistence.jpa.Address</class>
+		<class>es.art83.persistence.jpa.User5</class>
+		<class>es.art83.persistence.jpa.Category</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> <!--drop-and-create-tables   none-->
             <property name="eclipselink.logging.level" value="INFO" /> <!-- OFF,WARNING,INFO,FINE,ALL -->
