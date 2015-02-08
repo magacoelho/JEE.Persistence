@@ -40,11 +40,11 @@ public class PhoneQuerys {
     }
 
     private long numberOfPhonescriteria() {
-        CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Long> countQuery = criteria.createQuery(Long.class);
-        Root<Phone> rootPhone = countQuery.from(Phone.class);
-        countQuery.select(criteria.count(rootPhone));
-        TypedQuery<Long> longQuery = entityManager.createQuery(countQuery);
+        CriteriaBuilder criteriaBuirlder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = criteriaBuirlder.createQuery(Long.class);
+        Root<Phone> rootPhone = criteriaQuery.from(Phone.class);
+        criteriaQuery.select(criteriaBuirlder.count(rootPhone));
+        TypedQuery<Long> longQuery = entityManager.createQuery(criteriaQuery);
         return longQuery.getSingleResult();
     }
 
@@ -112,15 +112,29 @@ public class PhoneQuerys {
         return typedQuery.getResultList();
 
     }
-    
-    private static final String JPQL1= "SELECT p.number FROM Phone p WHERE p.id > 3 AND p.phoneType IS NOT NULL";
+
+    private static final String JPQL1 = "SELECT p.number FROM Phone p WHERE p.id > 3 AND p.phoneType IS NOT NULL";
 
     @SuppressWarnings("unchecked")
     private List<PhoneType> findJpql1() {
-        return (List<PhoneType>) entityManager.createQuery(JPQL1)
-                .getResultList();
+        return (List<PhoneType>) entityManager.createQuery(JPQL1).getResultList();
     }
 
+    private static final String JPQL2 = "SELECT p.id FROM Phone p WHERE p.number > 111";
+
+    @SuppressWarnings("unchecked")
+    private List<Integer> findJpql2() {
+        return (List<Integer>) entityManager.createQuery(JPQL2).getResultList();
+    }
+
+    private static final String JPQL3 = "SELECT p FROM Phone p WHERE p.phoneType = :type AND p.number < 200 ORDER BY p.number";
+
+    @SuppressWarnings("unchecked")
+    private List<Phone> findJpql3() {
+        Query query = entityManager.createQuery(JPQL3);
+        query.setParameter("type", PhoneType.WORK);
+        return (List<Phone>) query.getResultList();
+    }
 
     public static void main(String[] args) {
         PhoneQuerys criteriaPhone = new PhoneQuerys();
@@ -137,10 +151,10 @@ public class PhoneQuerys {
         System.out.println("findPhoneTypesDistinct: " + criteriaPhone.findPhoneTypesDistinctJpql());
         System.out.println("findPhoneTypesDistinct: "
                 + criteriaPhone.findPhoneTypesDistinctCriteria());
-        
-        System.out.println("findJpql1: " + criteriaPhone.findJpql1());
-    }
-    
 
+        System.out.println("findJpql1: " + criteriaPhone.findJpql1());
+        System.out.println("findJpql2: " + criteriaPhone.findJpql2());
+        System.out.println("findJpql3: " + criteriaPhone.findJpql3());
+    }
 
 }
