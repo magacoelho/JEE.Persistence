@@ -12,6 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import es.art83.persistence.models.utils.PhoneType;
 
@@ -70,7 +75,8 @@ public class Phone {
     }
 
     public static void main(String[] args) {
-        EntityManager entityManager = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        EntityManager entityManager = Persistence.createEntityManagerFactory("BBDD")
+                .createEntityManager();
         List<Phone> phones = new ArrayList<Phone>();
         phones.add(new Phone(PhoneType.HOME, 666));
         phones.add(new Phone(PhoneType.MOBILE, 999));
@@ -85,12 +91,31 @@ public class Phone {
         }
         entityManager.getTransaction().commit();
         // find
-        Query query= entityManager.createQuery("SELECT p.phoneType FROM Phone p WHERE p.number = 666");
-        System.out.println("Query: " + query.getSingleResult());
-        
+        Query query1 = entityManager
+                .createQuery("SELECT p.phoneType FROM Phone p WHERE p.number = 666");
+        System.out.println("Query: " + query1.getSingleResult());
+
         Query query2 = entityManager.createNamedQuery(Phone.FIND_PHONES_BY_TYPE);
         query2.setParameter(Phone.TYPE, PhoneType.MOBILE);
         System.out.println("Named query: " + query2.getResultList());
-    }
 
+        CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+        CriteriaQuery<PhoneType> query = criteria.createQuery(PhoneType.class);
+        Root<Phone> phone = query.from(Phone.class);
+
+        query.select(phone.get("phoneType"));
+
+        Predicate p1 = criteria.equal(phone.get("number").as(Integer.class), 666);
+        Predicate p2 = criteria.gt(phone.get("id"), 2);
+        Predicate p3 = criteria.isNotNull(phone.get("phoneType"));
+        Predicate predicate = criteria.and(criteria.or(p1, p2), p3);
+        query.where(predicate);
+        query.orderBy(criteria.asc(phone.get("phoneType")));
+        //Probar  DISTINCT
+        TypedQuery<PhoneType> typedQuery = entityManager.createQuery(query);
+        typedQuery.setFirstResult(0);
+        typedQuery.setMaxResults(0); // Se buscan todos
+        List<PhoneType> result = typedQuery.getResultList();
+        System.out.println(result);
+    }
 }
