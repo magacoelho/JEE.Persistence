@@ -22,13 +22,13 @@ public class User7 {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Phone> phones;
+    private List<Phone2> phones;
 
     public User7() {
         super();
     }
 
-    public User7(Integer id, String description, List<Phone> phones) {
+    public User7(Integer id, String description, List<Phone2> phones) {
         super();
         this.id = id;
         this.description = description;
@@ -56,20 +56,20 @@ public class User7 {
         return "User7 [id=" + id + ", description=" + description + ", phones=" + phones + "]";
     }
 
-    public List<Phone> getPhones() {
+    public List<Phone2> getPhones() {
         return phones;
     }
 
-    public void setPhones(List<Phone> phones) {
+    public void setPhones(List<Phone2> phones) {
         this.phones = phones;
     }
 
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        List<Phone> phones = new ArrayList<Phone>();
-        phones.add(new Phone(PhoneType.HOME, 666));
-        phones.add(new Phone(PhoneType.MOBILE, 999));
-        phones.add(new Phone(PhoneType.WORK, 000));
+        List<Phone2> phones = new ArrayList<Phone2>();
+        phones.add(new Phone2(PhoneType.HOME, 666));
+        phones.add(new Phone2(PhoneType.MOBILE, 999));
+        phones.add(new Phone2(PhoneType.WORK, 000));
         User7 u = new User7(1, "Soy u", phones);
         User7 u2 = new User7(2, "Soy u", null);
         // Create

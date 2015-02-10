@@ -5,17 +5,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Category {
+public class Category2 {
     @Id
     @GeneratedValue
     private Integer id;
 
     private String description;
 
-    public Category() {
+    public Category2() {
     }
 
-    public Category(String description) {
+    public Category2(String description) {
         this.description = description;
     }
 

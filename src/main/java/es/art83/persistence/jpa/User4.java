@@ -17,13 +17,13 @@ public class User4 {
     private String content;
 
     @Embedded
-    private Address adress;
+    private Address2 adress;
 
     public User4() {
         super();
     }
 
-    public User4(Integer id, String content, Address adress) {
+    public User4(Integer id, String content, Address2 adress) {
         this.id = id;
         this.content = content;
         this.adress = adress;
@@ -45,11 +45,11 @@ public class User4 {
         this.content = content;
     }
 
-    public Address getAdress() {
+    public Address2 getAdress() {
         return adress;
     }
 
-    public void setAdress(Address adress) {
+    public void setAdress(Address2 adress) {
         this.adress = adress;
     }
 
@@ -60,7 +60,7 @@ public class User4 {
 
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        User4 u = new User4(1, "Sou u", new Address("city", "street"));
+        User4 u = new User4(1, "Sou u", new Address2("city", "street"));
         User4 u2 = new User4(2, "Sou u", null);
         // Create
         em.getTransaction().begin();

@@ -18,7 +18,7 @@ public class User6 {
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user6")
-    private Boat boat;
+    private Boat2 boat;
 
     public User6() {
         super();
@@ -45,11 +45,11 @@ public class User6 {
         this.description = description;
     }
 
-    public Boat getBoat() {
+    public Boat2 getBoat() {
         return boat;
     }
 
-    public void setBoat(Boat boat) {
+    public void setBoat(Boat2 boat) {
         this.boat = boat;
     }
 
@@ -61,7 +61,7 @@ public class User6 {
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
         User6 u = new User6(1, "Soy u");
-        Boat boat = new Boat("boat", u);
+        Boat2 boat = new Boat2("boat", u);
         u.setBoat(boat);
         User6 u2 = new User6(2, "Soy u");
         // Create

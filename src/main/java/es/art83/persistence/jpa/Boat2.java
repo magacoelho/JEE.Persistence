@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Boat {
+public class Boat2 {
     @Id
     @GeneratedValue
     private Integer id;
@@ -18,13 +18,13 @@ public class Boat {
     @JoinColumn
     private User6 user6;
 
-    public Boat(String description, User6 user6) {
+    public Boat2(String description, User6 user6) {
         super();
         this.description = description;
         this.user6 = user6;
     }
 
-    public Boat() {
+    public Boat2() {
     }
 
     public Integer getId() {

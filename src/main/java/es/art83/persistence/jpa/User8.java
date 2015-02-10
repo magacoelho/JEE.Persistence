@@ -20,7 +20,7 @@ public class User8 {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user8")
-    private List<Vehicle> vehicles;
+    private List<Vehicle2> vehicles;
 
     public User8() {
         super();
@@ -48,11 +48,11 @@ public class User8 {
         this.description = description;
     }
 
-    public List<Vehicle> getVehicles() {
+    public List<Vehicle2> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<Vehicle> vehicles) {
+    public void setVehicles(List<Vehicle2> vehicles) {
         this.vehicles = vehicles;
     }
 
@@ -64,9 +64,9 @@ public class User8 {
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
         User8 u = new User8(1, "Soy u");
-        List<Vehicle> vehicles = new ArrayList<Vehicle>();
-        vehicles.add(new Vehicle("123", "Soy v", u));
-        vehicles.add(new Vehicle("456", "Soy v", u));
+        List<Vehicle2> vehicles = new ArrayList<Vehicle2>();
+        vehicles.add(new Vehicle2("123", "Soy v", u));
+        vehicles.add(new Vehicle2("456", "Soy v", u));
         u.setVehicles(vehicles);
         User8 u2 = new User8(2, "Soy u");
         // Create

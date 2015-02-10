@@ -5,17 +5,17 @@ import java.lang.String;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Address implements Serializable {
+public class Address2 implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String city;
 
     private String street;
 
-    public Address() {
+    public Address2() {
     }
 
-    public Address(String city, String street) {
+    public Address2(String city, String street) {
         this.city = city;
         this.street = street;
     }

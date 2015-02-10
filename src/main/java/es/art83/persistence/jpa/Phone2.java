@@ -15,10 +15,10 @@ import javax.persistence.Query;
 
 import es.art83.persistence.models.utils.PhoneType;
 
-@NamedQuery(name = Phone.FIND_PHONES_BY_TYPE, query = "SELECT p FROM Phone p WHERE p.phoneType = :"
-        + Phone.TYPE)
+@NamedQuery(name = Phone2.FIND_PHONES_BY_TYPE, query = "SELECT p FROM Phone2 p WHERE p.phoneType = :"
+        + Phone2.TYPE)
 @Entity
-public class Phone {
+public class Phone2 {
     public static final String FIND_PHONES_BY_TYPE = "findPhonesByType";
 
     public static final String TYPE = "type";
@@ -32,12 +32,12 @@ public class Phone {
 
     private int number;
 
-    public Phone(PhoneType phoneType, int number) {
+    public Phone2(PhoneType phoneType, int number) {
         this.phoneType = phoneType;
         this.number = number;
     }
 
-    public Phone() {
+    public Phone2() {
     }
 
     public Integer getId() {
@@ -72,26 +72,26 @@ public class Phone {
     public static void main(String[] args) {
         EntityManager entityManager = Persistence.createEntityManagerFactory("BBDD")
                 .createEntityManager();
-        List<Phone> phones = new ArrayList<Phone>();
-        phones.add(new Phone(PhoneType.HOME, 666));
-        phones.add(new Phone(PhoneType.MOBILE, 999));
-        phones.add(new Phone(PhoneType.WORK, 000));
-        phones.add(new Phone(PhoneType.HOME, 111));
-        phones.add(new Phone(PhoneType.MOBILE, 444));
-        phones.add(new Phone(PhoneType.WORK, 222));
+        List<Phone2> phones = new ArrayList<Phone2>();
+        phones.add(new Phone2(PhoneType.HOME, 666));
+        phones.add(new Phone2(PhoneType.MOBILE, 999));
+        phones.add(new Phone2(PhoneType.WORK, 000));
+        phones.add(new Phone2(PhoneType.HOME, 111));
+        phones.add(new Phone2(PhoneType.MOBILE, 444));
+        phones.add(new Phone2(PhoneType.WORK, 222));
         // Create
         entityManager.getTransaction().begin();
-        for (Phone phone : phones) {
+        for (Phone2 phone : phones) {
             entityManager.persist(phone);
         }
         entityManager.getTransaction().commit();
         // find
         Query query1 = entityManager
-                .createQuery("SELECT p.phoneType FROM Phone p WHERE p.number = 666");
+                .createQuery("SELECT p.phoneType FROM Phone2 p WHERE p.number = 666");
         System.out.println("Query: " + query1.getSingleResult());
 
-        Query query2 = entityManager.createNamedQuery(Phone.FIND_PHONES_BY_TYPE);
-        query2.setParameter(Phone.TYPE, PhoneType.MOBILE);
+        Query query2 = entityManager.createNamedQuery(Phone2.FIND_PHONES_BY_TYPE);
+        query2.setParameter(Phone2.TYPE, PhoneType.MOBILE);
         System.out.println("Named query: " + query2.getResultList());
     }
 }

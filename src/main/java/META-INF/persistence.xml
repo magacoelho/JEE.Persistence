@@ -8,18 +8,24 @@
 		<class>es.art83.persistence.jpa.User2</class>
 		<class>es.art83.persistence.jpa.User3</class>
 		<class>es.art83.persistence.jpa.User4</class>
-		<class>es.art83.persistence.jpa.Address</class>
+		<class>es.art83.persistence.jpa.Address2</class>
 		<class>es.art83.persistence.jpa.User5</class>
-		<class>es.art83.persistence.jpa.Category</class>
+		<class>es.art83.persistence.jpa.Category2</class>
 		<class>es.art83.persistence.jpa.User6</class>
-		<class>es.art83.persistence.jpa.Boat</class>
-		<class>es.art83.persistence.jpa.Phone</class>
+		<class>es.art83.persistence.jpa.Boat2</class>
+		<class>es.art83.persistence.jpa.Phone2</class>
 		<class>es.art83.persistence.jpa.User7</class>
 		<class>es.art83.persistence.jpa.User8</class>
-		<class>es.art83.persistence.jpa.Vehicle</class>
+		<class>es.art83.persistence.jpa.Vehicle2</class>
 		<class>es.art83.persistence.jpa.inheritance.C1</class>
 		<class>es.art83.persistence.jpa.inheritance.C1A</class>
 		<class>es.art83.persistence.jpa.inheritance.C1B</class>
+		<class>es.art83.persistence.models.entities.jpa.Address</class>
+		<class>es.art83.persistence.models.entities.jpa.Boat</class>
+		<class>es.art83.persistence.models.entities.jpa.Category</class>
+		<class>es.art83.persistence.models.entities.jpa.Phone</class>
+		<class>es.art83.persistence.models.entities.jpa.User</class>
+		<class>es.art83.persistence.models.entities.jpa.Vehicle</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> <!--drop-and-create-tables   none-->
             <property name="eclipselink.logging.level" value="INFO" /> <!-- OFF,WARNING,INFO,FINE,ALL -->

@@ -20,13 +20,13 @@ public class User5 {
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn
-    private Category category;
+    private Category2 category;
 
     public User5() {
         super();
     }
 
-    public User5(Integer id, String description, Category category) {
+    public User5(Integer id, String description, Category2 category) {
         super();
         this.id = id;
         this.description = description;
@@ -49,11 +49,11 @@ public class User5 {
         this.description = description;
     }
 
-    public Category getCategory() {
+    public Category2 getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(Category2 category) {
         this.category = category;
     }
 
@@ -64,7 +64,7 @@ public class User5 {
 
     public static void main(String[] args) {
         EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
-        User5 u = new User5(1, "Soy u", new Category("categoria"));
+        User5 u = new User5(1, "Soy u", new Category2("categoria"));
         User5 u2 = new User5(2, "Soy u", null);
         // Create
         em.getTransaction().begin();
