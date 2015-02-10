@@ -38,20 +38,17 @@ public class DaoJpaFactory extends DaoFactory {
 
     @Override
     public BoatDao getBoatDao() {
-        // TODO Auto-generated method stub
-        return null;
+        return new BoatDaoJpa();
     }
 
     @Override
     public VehicleDao getVehicleDao() {
-        // TODO Auto-generated method stub
-        return null;
+        return new VehicleDaoJpa();
     }
 
     @Override
     public PhoneDao getPhoneDao() {
-        // TODO Auto-generated method stub
-        return null;
+        return new PhoneDaoJpa();
     }
 
 }
