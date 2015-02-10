@@ -13,8 +13,8 @@ import es.art83.persistence.models.daos.DaoFactory;
 import es.art83.persistence.models.daos.PhoneDao;
 import es.art83.persistence.models.daos.UserDao;
 import es.art83.persistence.models.daos.VehicleDao;
-import es.art83.persistence.models.entities.Category;
-import es.art83.persistence.models.entities.User;
+import es.art83.persistence.models.entities.jdbc.Category;
+import es.art83.persistence.models.entities.jdbc.User;
 
 public class DaoJdbcFactory extends DaoFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";

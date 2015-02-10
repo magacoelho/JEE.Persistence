@@ -3,7 +3,7 @@ package es.art83.persistence.models.daos.jdbc;
 import java.util.List;
 
 import es.art83.persistence.models.daos.VehicleDao;
-import es.art83.persistence.models.entities.Vehicle;
+import es.art83.persistence.models.entities.jdbc.Vehicle;
 
 public class VehicleDaoJdbc extends GenericDaoJdbc<Vehicle, Integer> implements VehicleDao {
 

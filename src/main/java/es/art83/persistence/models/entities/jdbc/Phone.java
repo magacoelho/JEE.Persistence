@@ -1,4 +1,4 @@
-package es.art83.persistence.models.entities;
+package es.art83.persistence.models.entities.jdbc;
 
 import es.art83.persistence.models.utils.PhoneType;
 

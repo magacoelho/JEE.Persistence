@@ -3,7 +3,7 @@ package es.art83.persistence.models.daos.jdbc;
 import java.util.List;
 
 import es.art83.persistence.models.daos.BoatDao;
-import es.art83.persistence.models.entities.Boat;
+import es.art83.persistence.models.entities.jdbc.Boat;
 
 public class BoatDaoJdbc extends GenericDaoJdbc<Boat,Integer>implements BoatDao {
 

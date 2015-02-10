@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import es.art83.persistence.models.daos.CategoryDao;
-import es.art83.persistence.models.entities.Category;
+import es.art83.persistence.models.entities.jdbc.Category;
 
 public class CategoryDaoJdbc extends GenericDaoJdbc<Category, Integer> implements CategoryDao {
     private Logger log = LogManager.getLogger(CategoryDaoJdbc.class);
