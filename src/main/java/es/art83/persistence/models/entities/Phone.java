@@ -1,6 +1,5 @@
-package es.art83.persistence.models.entities.jpa;
+package es.art83.persistence.models.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,7 +8,7 @@ import javax.persistence.Id;
 
 import es.art83.persistence.models.utils.PhoneType;
 
-@Entity(name = Phone.TABLE)
+@Entity
 public class Phone {
     public static final String TABLE = "phone";
 
@@ -17,16 +16,16 @@ public class Phone {
 
     @Id
     @GeneratedValue
-    @Column(name = ID)
     private Integer id;
 
     public static final String PHONE_TYPE = "PHONETYPE";
-    @Column(name = PHONE_TYPE)
-    @Enumerated(EnumType.STRING) //Opcional
+
+    @Enumerated(EnumType.STRING)
+    // Opcional
     private PhoneType phoneType;
 
     public static final String NUMBER = "NUMBER";
-    @Column(name = NUMBER)
+
     private int number;
 
     public Phone(PhoneType phoneType, int number) {

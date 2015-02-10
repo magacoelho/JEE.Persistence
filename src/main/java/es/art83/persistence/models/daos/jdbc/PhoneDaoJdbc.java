@@ -3,7 +3,7 @@ package es.art83.persistence.models.daos.jdbc;
 import java.util.List;
 
 import es.art83.persistence.models.daos.PhoneDao;
-import es.art83.persistence.models.entities.jdbc.Phone;
+import es.art83.persistence.models.entities.Phone;
 
 public class PhoneDaoJdbc extends GenericDaoJdbc<Phone, Integer> implements PhoneDao {
 

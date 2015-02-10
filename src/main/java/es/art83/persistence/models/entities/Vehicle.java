@@ -1,4 +1,4 @@
-package es.art83.persistence.models.entities.jpa;
+package es.art83.persistence.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

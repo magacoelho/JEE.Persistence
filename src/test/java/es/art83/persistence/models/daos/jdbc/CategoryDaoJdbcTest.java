@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import es.art83.persistence.models.daos.CategoryDao;
 import es.art83.persistence.models.daos.DaoFactory;
-import es.art83.persistence.models.entities.jdbc.Category;
+import es.art83.persistence.models.entities.Category;
 
 public class CategoryDaoJdbcTest {
     private CategoryDao dao;

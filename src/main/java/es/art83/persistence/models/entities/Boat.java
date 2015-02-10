@@ -1,10 +1,19 @@
-package es.art83.persistence.models.entities.jdbc;
+package es.art83.persistence.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Boat {
     public static final String TABLE = "boat";
 
     public static final String ID = "ID";
 
+    @Id
+    @GeneratedValue
     private Integer id;
 
     public static final String DESCRIPTION = "DESCRIPTION";
@@ -13,6 +22,8 @@ public class Boat {
 
     public static final String USER = "USER_ID";
 
+    @OneToOne
+    @JoinColumn
     private User user;
 
     public Boat(String description, User user) {

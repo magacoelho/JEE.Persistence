@@ -10,9 +10,9 @@ import org.apache.logging.log4j.Logger;
 
 import es.art83.persistence.models.daos.DaoFactory;
 import es.art83.persistence.models.daos.UserDao;
-import es.art83.persistence.models.entities.jdbc.Address;
-import es.art83.persistence.models.entities.jdbc.Category;
-import es.art83.persistence.models.entities.jdbc.User;
+import es.art83.persistence.models.entities.Address;
+import es.art83.persistence.models.entities.Category;
+import es.art83.persistence.models.entities.User;
 
 public class UserDaoJdbc extends GenericDaoJdbc<User, Integer> implements UserDao {
 

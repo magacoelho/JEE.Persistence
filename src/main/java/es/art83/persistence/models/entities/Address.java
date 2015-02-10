@@ -1,5 +1,8 @@
-package es.art83.persistence.models.entities.jdbc;
+package es.art83.persistence.models.entities;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
     public static final String CITY = "CITY";
 

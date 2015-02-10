@@ -1,11 +1,17 @@
-package es.art83.persistence.models.entities.jdbc;
+package es.art83.persistence.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Category {
     public static final String TABLE = "category";
 
     // Clave primaria
     public static final String ID = "ID";
 
+    @Id
     private Integer id;
 
     public static final String NAME = "NAME";
@@ -17,6 +23,7 @@ public class Category {
     private String description;
 
     // Atributo que no tiene persistencia
+    @Transient
     private String volatil;
 
     public Category() {
