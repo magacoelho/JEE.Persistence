@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Persistence;
 
 @Entity
 public class User8 {
@@ -62,7 +61,8 @@ public class User8 {
     }
 
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager em = JpaFactory.getEntityManagerFactory().createEntityManager();
         User8 u = new User8(1, "Soy u");
         List<Vehicle2> vehicles = new ArrayList<Vehicle2>();
         vehicles.add(new Vehicle2("123", "Soy v", u));

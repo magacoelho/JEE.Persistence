@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Persistence;
 
 @Entity
 public class User6 {
@@ -59,7 +58,8 @@ public class User6 {
     }
 
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager em = JpaFactory.getEntityManagerFactory().createEntityManager();
         User6 u = new User6(1, "Soy u");
         Boat2 boat = new Boat2("boat", u);
         u.setBoat(boat);

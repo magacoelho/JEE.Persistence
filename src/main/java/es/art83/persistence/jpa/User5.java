@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Persistence;
 
 @Entity
 public class User5 {
@@ -63,7 +62,8 @@ public class User5 {
     }
 
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager em = JpaFactory.getEntityManagerFactory().createEntityManager();
         User5 u = new User5(1, "Soy u", new Category2("categoria"));
         User5 u2 = new User5(2, "Soy u", null);
         // Create

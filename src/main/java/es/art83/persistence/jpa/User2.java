@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Persistence;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -90,7 +89,8 @@ public class User2 {
     }
 
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager em = JpaFactory.getEntityManagerFactory().createEntityManager();
         User2 u1 = new User2();
         u1.setDescription("esta es...");
         // Create

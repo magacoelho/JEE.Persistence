@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,7 +17,9 @@ public class PhoneQuerys {
     private EntityManager entityManager;
 
     public PhoneQuerys() {
-        entityManager = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        entityManager = JpaFactory.getEntityManagerFactory().createEntityManager();
+
         List<Phone2> phones = new ArrayList<Phone2>();
         phones.add(new Phone2(PhoneType.HOME, 999));
         phones.add(new Phone2(PhoneType.MOBILE, 666));

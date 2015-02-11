@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Persistence;
 
 import es.art83.persistence.models.utils.PhoneType;
 
@@ -65,7 +64,8 @@ public class User7 {
     }
 
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager em = JpaFactory.getEntityManagerFactory().createEntityManager();
         List<Phone2> phones = new ArrayList<Phone2>();
         phones.add(new Phone2(PhoneType.HOME, 666));
         phones.add(new Phone2(PhoneType.MOBILE, 999));

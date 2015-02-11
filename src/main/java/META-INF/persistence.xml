@@ -27,7 +27,7 @@
 		<class>es.art83.persistence.models.entities.User</class>
 		<class>es.art83.persistence.models.entities.Vehicle</class>
         <properties>
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> <!--drop-and-create-tables   none-->
+            <property name="eclipselink.ddl-generation" value="none" /> <!--drop-and-create-tables   none-->
             <property name="eclipselink.logging.level" value="INFO" /> <!-- OFF,WARNING,INFO,FINE,ALL -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bbdd" />
             <property name="javax.persistence.jdbc.user" value="root" />

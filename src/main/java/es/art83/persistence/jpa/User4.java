@@ -7,7 +7,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
-import javax.persistence.Persistence;
 
 @Entity
 public class User4 {
@@ -59,7 +58,8 @@ public class User4 {
     }
 
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager em = JpaFactory.getEntityManagerFactory().createEntityManager();
         User4 u = new User4(1, "Sou u", new Address2("city", "street"));
         User4 u2 = new User4(2, "Sou u", null);
         // Create

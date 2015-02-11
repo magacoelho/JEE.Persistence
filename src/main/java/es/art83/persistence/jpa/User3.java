@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.Persistence;
 
 @Entity
 @IdClass(User3PK.class) 
@@ -57,7 +56,8 @@ public class User3 {
     }
 
     public static void main(String[] args) {
-        EntityManager em = Persistence.createEntityManagerFactory("BBDD").createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager em = JpaFactory.getEntityManagerFactory().createEntityManager();
         User3 u = new User3(3,4,"clave compuesta");
         // Create
         em.getTransaction().begin();

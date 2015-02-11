@@ -70,8 +70,8 @@ public class Phone2 {
     }
 
     public static void main(String[] args) {
-        EntityManager entityManager = Persistence.createEntityManagerFactory("BBDD")
-                .createEntityManager();
+        JpaFactory.dropAndCreateTables();
+        EntityManager entityManager = JpaFactory.getEntityManagerFactory().createEntityManager();
         List<Phone2> phones = new ArrayList<Phone2>();
         phones.add(new Phone2(PhoneType.HOME, 666));
         phones.add(new Phone2(PhoneType.MOBILE, 999));
