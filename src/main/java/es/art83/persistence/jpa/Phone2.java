@@ -10,7 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import es.art83.persistence.models.utils.PhoneType;
