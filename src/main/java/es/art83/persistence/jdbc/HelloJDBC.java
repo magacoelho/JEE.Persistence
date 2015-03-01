@@ -58,7 +58,7 @@ public class HelloJDBC {
             sentencia.executeUpdate("DELETE FROM tabla1  WHERE id1=5");
             System.out.println("OK. Datos borrados de la tabla");
         } catch (SQLException e) {
-            System.out.println("Insercción de datos de tabla fallida: " + e.getMessage());
+            System.out.println("Borrado de datos de tabla fallida: " + e.getMessage());
         }
 
     }
