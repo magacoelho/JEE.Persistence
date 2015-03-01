@@ -20,8 +20,7 @@ public class Phone {
 
     public static final String PHONE_TYPE = "PHONETYPE";
 
-    @Enumerated(EnumType.STRING)
-    // Opcional
+    @Enumerated(EnumType.STRING) // Opcional
     private PhoneType phoneType;
 
     public static final String NUMBER = "NUMBER";

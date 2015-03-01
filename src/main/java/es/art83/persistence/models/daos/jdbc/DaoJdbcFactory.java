@@ -59,7 +59,6 @@ public class DaoJdbcFactory extends DaoFactory {
 
     @Override
     public UserDao getUserDao() {
-        // TODO Auto-generated method stub
         return new UserDaoJdbc();
     }
 

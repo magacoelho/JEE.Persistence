@@ -8,7 +8,6 @@ import javax.persistence.Transient;
 public class Category {
     public static final String TABLE = "category";
 
-    // Clave primaria
     public static final String ID = "ID";
 
     @Id

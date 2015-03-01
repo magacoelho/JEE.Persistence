@@ -10,7 +10,6 @@ public class PhoneDaoJdbc extends GenericDaoJdbc<Phone, Integer> implements Phon
     @Override
     public void create(Phone entity) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -22,13 +21,11 @@ public class PhoneDaoJdbc extends GenericDaoJdbc<Phone, Integer> implements Phon
     @Override
     public void update(Phone entity) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void deleteById(Integer id) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
