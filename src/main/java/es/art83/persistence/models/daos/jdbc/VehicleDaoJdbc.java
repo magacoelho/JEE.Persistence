@@ -10,7 +10,6 @@ public class VehicleDaoJdbc extends GenericDaoJdbc<Vehicle, Integer> implements 
     @Override
     public void create(Vehicle entity) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -22,13 +21,11 @@ public class VehicleDaoJdbc extends GenericDaoJdbc<Vehicle, Integer> implements 
     @Override
     public void update(Vehicle entity) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void deleteById(Integer id) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
