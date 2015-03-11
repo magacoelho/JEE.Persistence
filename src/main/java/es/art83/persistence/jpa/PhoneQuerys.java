@@ -120,6 +120,22 @@ public class PhoneQuerys {
     private List<PhoneType> findJpql1() {
         return (List<PhoneType>) entityManager.createQuery(JPQL1).getResultList();
     }
+    
+    
+    private List<Integer> find1Criteria(){
+    	
+    	CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Integer> cQuery = cBuilder.createQuery(Integer.class);
+        Root<Phone2> rootPhone  = cQuery.from(Phone2.class);
+        cQuery.select(rootPhone.get("number"));
+        Predicate p1 =cBuilder.gt(rootPhone.get("id"),3);
+        Predicate p2 = cBuilder.isNotNull(rootPhone.get("phoneType"));
+        Predicate predicate = cBuilder.and(cBuilder.and(p1, p2));
+        cQuery.where(predicate);
+        TypedQuery<Integer> phoneQuery = entityManager.createQuery(cQuery);
+     	return  phoneQuery.getResultList();
+    }
+    
 
     private static final String JPQL2 = "SELECT p.id FROM Phone2 p WHERE p.number > 111";
 
@@ -127,6 +143,20 @@ public class PhoneQuerys {
     private List<Integer> findJpql2() {
         return (List<Integer>) entityManager.createQuery(JPQL2).getResultList();
     }
+    
+   
+    private List<Integer> find2Criteria() {
+    	CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
+    	CriteriaQuery<Integer> cQuery = cBuilder.createQuery(Integer.class);// clase de respuesta
+    	Root<Phone2> rootPhone = cQuery.from(Phone2.class);
+    	cQuery.select(rootPhone.get("id"));
+        Predicate p1 =cBuilder.gt(rootPhone.get("number"),111);
+    	cQuery.where(p1);
+    	TypedQuery<Integer> phoneIdQuery = entityManager.createQuery(cQuery);
+    	
+        return phoneIdQuery.getResultList();
+    }
+    
 
     private static final String JPQL3 = "SELECT p FROM Phone2 p WHERE p.phoneType = :type AND p.number < 200 ORDER BY p.number";
 
@@ -136,6 +166,26 @@ public class PhoneQuerys {
         query.setParameter("type", PhoneType.WORK);
         return (List<Phone2>) query.getResultList();
     }
+    
+    private List<Phone2> find3Criteria(PhoneType phoneType) {
+    	CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
+    	CriteriaQuery<Phone2> cQuery = cBuilder.createQuery(Phone2.class);//clase respuesta
+    	Root<Phone2> rootPhone = cQuery.from(Phone2.class);
+    	cQuery.select(rootPhone); // sin get devolver el objeto Phone2 entero
+      
+    	Predicate p1 =cBuilder.equal(rootPhone.get("phoneType"),phoneType);
+    	Predicate p2 = cBuilder.lt(rootPhone.get("number"),200);
+    	
+        Predicate predicate = cBuilder.and(p1,p2); 			
+    			
+    	cQuery.where(predicate);
+    	
+    	cQuery.orderBy(cBuilder.asc(rootPhone.get("number")));
+    	TypedQuery<Phone2> phoneIdQuery = entityManager.createQuery(cQuery);
+    	
+        return phoneIdQuery.getResultList();
+    }
+ 
 
     public static void main(String[] args) {
         PhoneQuerys criteriaPhone = new PhoneQuerys();
@@ -150,12 +200,17 @@ public class PhoneQuerys {
         System.out.println("findPhonesCriteria: " + criteriaPhone.findPhonesCriteria(0, 2));
 
         System.out.println("findPhoneTypesDistinct: " + criteriaPhone.findPhoneTypesDistinctJpql());
-        System.out.println("findPhoneTypesDistinct: "
+        System.out.println("findPhoneTypesDistinct:--- "
                 + criteriaPhone.findPhoneTypesDistinctCriteria());
 
         System.out.println("findJpql1: " + criteriaPhone.findJpql1());
         System.out.println("findJpql2: " + criteriaPhone.findJpql2());
         System.out.println("findJpql3: " + criteriaPhone.findJpql3());
+        
+        System.out.println("---Criteria----");
+        System.out.println("findJpql1 Criteria: " + criteriaPhone.find1Criteria());
+        System.out.println("findJpql2 Criteria: " + criteriaPhone.find2Criteria());
+        System.out.println("findJpql3 Criteria: " + criteriaPhone.find3Criteria(PhoneType.WORK));
     }
 
 }

@@ -5,7 +5,7 @@ import java.lang.String;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Address2 implements Serializable {
+public class Address2 implements Serializable {  
     private static final long serialVersionUID = 1L;
 
     private String city;
